@@ -1,6 +1,8 @@
 {
-  "name": "easyOrder3",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {}
+  "name": "foodIonic",
+  "app_id": "ef622600",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
 }

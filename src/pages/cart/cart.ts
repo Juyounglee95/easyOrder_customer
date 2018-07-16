@@ -1,0 +1,217 @@
+import { Component } from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import { AlertController } from 'ionic-angular';
+import { CartService } from '../../providers/cart-service-mock';
+
+import * as firebase from "firebase";
+import 'firebase/firestore';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+@IonicPage({
+	name: 'page-cart',
+	segment: 'cart'
+})
+
+@Component({
+	selector: 'page-cart',
+	templateUrl: 'cart.html',
+})
+
+export class CartPage {
+	public menus : Array<any>=[];
+	orders: Array<any> = [];
+	//totalVal: number = 0;
+	public store : any ;
+	public table: any;
+	public  qtds: Array<any>=[];
+	public menuCollection: any;
+	public  db = firebase.firestore();
+	public totalprice: number=0;
+	owner:string='';
+	order:string='';
+	total:number=0;
+	names:string='';
+	date:string='';
+	constructor(public navCtrl: NavController, public navParams: NavParams, public cartService: CartService,private alertCtrl: AlertController,  private http: HttpClient) {
+		var table_a = this.get_t().then(table_a=> this.table= table_a);
+		var store_a = this.get_s().then(store_a=> this.store = store_a)
+			.then(()=>this.getmenu());
+	}
+	async menuAsync(){
+		let menu = await this._menu();
+		return menu;
+	}
+	async get_s(){
+		let store = await this._store();
+		return store;
+	}
+	async  get_t(){
+		let table = await this._table();
+		return table;
+
+	}
+	async checkoutAsync(){
+		let check = await this._check();
+		return check;
+	}
+
+	registerOrder(){
+		console.log(this.owner)
+		// var names = "";
+		// var price = this.totalprice;
+		// let date : String = new Date().toUTCString();
+		// for(let data of this.menus) {
+		// 	names += data.name +' : '+ data.status+' ';
+		// }
+        //
+		// var addDoc = this.db.collection('order').add({
+		// 	menu : names,
+		// 	status : true,
+		// 	table_num : this.table,
+		// 	timestamp : date,
+		// 	totalprice : price,
+		// 	user : firebase.auth().currentUser.email
+		// }).then(ref => {
+		// 	console.log('Added document with ID: ', ref.id);
+		// });
+
+		let body = {
+			"notification":{
+				"title":"New order is arrived",
+				"body":this.order,
+				"sound":"default",
+				"click_action":"FCM_PLUGIN_ACTIVITY",
+				"icon":"fcm_push_icon"
+			},
+			"data":{
+				// menu : this.names,
+				// status : true,
+				// table_num : this.table,
+				// timestamp : this.date,
+				// totalprice : this.totalprice,
+				// user : firebase.auth().currentUser.email,
+				// store_code : this.store
+			},
+			"to":"/topics/"+this.store,
+			"priority":"high",
+			"restricted_package_name":""
+		}
+		let options = new HttpHeaders().set('Content-Type','application/json');
+		this.http.post("https://fcm.googleapis.com/fcm/send",body,{
+			headers: options.set('Authorization', 'key=AAAA94sqthU:APA91bF4quIXvQYLJlwp3mNMh6HdYpTGoDIIVOODLheD5LcLdge-JZhe4N2AaQjVMtqwDdQGhaXW4BMhkpEW9SuTwYWBuASd1bZGSaB_Me9sw3cCcUNlYa7NetC-BkX5OaBsLqFEJgRC'),
+		})
+			.subscribe();
+	}
+
+	_check():Promise<any>{
+				return new Promise<any>(resolve => {
+					var success = "success";
+					this.date = new Date().toUTCString();
+					for(let data of this.menus) {
+						this.names += data.name +' : '+ data.status+' ';
+					}
+					var addDoc = this.db.collection('order').add({
+
+						menu : this.names,
+						status : true,
+						table_num : this.table,
+						timestamp : this.date,
+						totalprice : this.totalprice,
+						user : firebase.auth().currentUser.email,
+						store_code : this.store
+					}).then(ref => {
+						resolve(success);
+						console.log('Added document with ID: ', ref.id);
+					});
+
+			//   resolve(store);
+		})
+	}
+	_menu():Promise<any>{
+		return new Promise<any>(resolve => {
+			var menu: Array<any>=[];
+
+			this.menuCollection = this.db.collection("menu");
+			var menuRef = this.menuCollection.where("store_code", "==", this.store);
+			var menuInfo = menuRef.get()
+				.then(snapshot => {
+					snapshot.forEach(doc => {
+						menu.push({
+							name : doc.data().name,
+							price : doc.data().price,
+							status : doc.data().status
+						});
+					});
+					resolve(menu);
+				})
+				.catch(err => {
+					console.log('Error getting documents', err);
+				});
+
+			//   resolve(store);
+		})
+	}
+	_store():Promise<any> {
+		return new Promise<any>(resolve => {
+			this.store = this.navParams.get("store_code");
+			this.owner = this.navParams.get("owner");
+			resolve(this.store);
+		})
+	}
+	_table():Promise<any> {
+		return new Promise<any>(resolve => {
+
+			this.table = this.navParams.get("table_num");
+			resolve(this.table);
+		})
+	}
+
+	getmenu(){
+		var menu_a = this.menuAsync().then(menu_a=> this.menus= menu_a)
+			.then(()=>console.log(this.menus)).catch();
+
+	}
+
+	count(){
+		for(let data of this.menus) {
+			console.log("pricepriceprice", data.status*data.price);
+			//this.totalprice += data.status* data.price;
+		}
+	}
+	// minus adult when click minus button
+	minusQtd(index: any){
+		if(this.menus[index].status>0) {
+			this.menus[index].status--;
+			this.totalprice -= this.menus[index].price;
+		}
+	}
+
+	plusQtd(index: any) {
+		this.menus[index].status++;
+		this.totalprice += this.menus[index].price;
+	}
+
+	presentAlert() {
+		this.order+='Table number : '+this.table+'<br/>';
+		for(let i=0; i<this.menus.length;i++){
+			this.order += this.menus[i].name + ':' + this.menus[i].status + '<br/>';
+			this.total += this.menus[i].status * this.menus[i].price;
+		}
+		this.order +='Total price = \u20A9' + this.total;
+		let alert = this.alertCtrl.create({
+			title: "Order success!",
+			subTitle : this.order,
+			buttons: ['OK']
+		});
+		alert.present();
+	}
+
+	openCheckout() {
+		console.log(this.owner);
+		var success  = this.checkoutAsync().then(()=>{this.registerOrder();}).then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-home');}).catch();
+		//console.log("result:",success);
+
+
+		//
+	}
+
+}

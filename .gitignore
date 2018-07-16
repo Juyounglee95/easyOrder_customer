@@ -12,8 +12,8 @@ log.txt
 .vscode/
 npm-debug.log*
 
-.idea/
 .sourcemaps/
+.idea/
 .sass-cache/
 .tmp/
 .versions/
@@ -27,6 +27,8 @@ platforms/
 plugins/
 plugins/android.json
 plugins/ios.json
+resources/android/
+resources/ios/
 www/
 $RECYCLE.BIN/
 

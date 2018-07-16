@@ -1,0 +1,33 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text>Entering Table Code</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="lightest-bg">
+
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<ion-item margin-top="20px">
+
+				<ion-textarea [(ngModel)]="code" placeholder="ABC123" maxlength="6"></ion-textarea>
+
+				<!--<ion-textarea placeholder="1" maxlength="1"></ion-textarea>-->
+				<!--<ion-textarea placeholder="2" maxlength="1"></ion-textarea>-->
+				<!--<ion-textarea placeholder="a" maxlength="1"></ion-textarea>-->
+				<!--<ion-textarea placeholder="5" maxlength="1"></ion-textarea>-->
+				<!--<ion-textarea placeholder="6" maxlength="1"></ion-textarea>-->
+			</ion-item>
+		</ion-row>
+		<button ion-button round margin-bottom="10px" (click)="inputTablecode()">
+			Confirm
+		</button>
+		<!--{{storemenu}}-->
+	</ion-grid>
+
+</ion-content>`

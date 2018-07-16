@@ -1,0 +1,147 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      <span ion-text>Restaurant</span>
+    </ion-title>
+
+    <ion-buttons end>
+      <button ion-button (click)="favorite(restaurant)">
+        <ion-icon name="heart"></ion-icon>
+      </button>
+      <button ion-button (click)="share(restaurant)">
+          <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="lightest-bg">
+  <ion-card *ngFor="let info_a of info" class= "full-width" no-margin>
+  	<!--<div class="card-img-wrap">-->
+      <!--&lt;!&ndash;<span ion-text class="card-img-status fw700 text-white" [ngClass]="{'closed': restaurant.label === 'closed', 'open': restaurant.label === 'open'}">&ndash;&gt;-->
+        <!--&lt;!&ndash;{{ restaurant.label }}&ndash;&gt;-->
+      <!--&lt;!&ndash;</span>&ndash;&gt;-->
+		  <!--<ion-slides class="to-top primary-bg" pager>-->
+		    <!--<ion-slide *ngFor="let image of restaurant.images">-->
+		      <!--<img src="{{ image }}" alt="">-->
+		    <!--</ion-slide>-->
+		  <!--</ion-slides>-->
+		<!--</div>-->
+    <!-- <img src="{{restaurant.picture}}"> -->
+    <ion-card-content>
+      <h1 ion-text color="dark" class="card-title fw700" text-center>
+      	{{info_a.name}}
+     	</h1>
+      <!--<p ion-text color="primary" text-center>1 mile<sup>sq</sup> • 30 - 60min • {{restaurant.price}}</p>-->
+      <!--<div text-center>-->
+		<!--<ion-badge color="secondary">{{restaurant.tags}}</ion-badge>-->
+      	<!--<ion-badge color="dark" class="text-11x">-->
+					<!--<ion-icon name="star"></ion-icon>-->
+        	<!--{{ restaurant.rating | number:'1.1' }}-->
+        <!--</ion-badge>-->
+			<!--</div>-->
+    </ion-card-content>
+
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<ion-col>
+			  <ion-segment [(ngModel)]="restaurantopts" padding-horizontal>
+				  <ion-segment-button value="info" >
+					  Information
+				  </ion-segment-button>
+			    <ion-segment-button value="reviews" (click)="getreview()">
+			      Reviews
+			    </ion-segment-button>
+			    <ion-segment-button value="menu"(click)="getmenu()">
+			      Menu
+			    </ion-segment-button>
+
+			  </ion-segment>
+
+				<div [ngSwitch]="restaurantopts" padding>
+
+					<div *ngSwitchCase="'reviews'" class="tab-reviews">
+
+						<h2 class ="fw700">List of reviews</h2>
+					  <ion-list class="list-full-border">
+					    <ion-item *ngFor="let review of reviews" margin-bottom text-wrap>
+
+				        <h2 class="fw700">
+					      	<ion-badge color="secondary" class="text-1x">
+										<ion-icon name="star"></ion-icon>
+					        	{{ review.star }}
+					        </ion-badge>
+				        </h2>
+
+					      <p ion-text>
+					        {{ review.content }}
+					      </p>
+					      <span ion-text class="author text-11x">{{ review.userid }} WHEN {{ review.rvtime }}</span>
+
+					    </ion-item>
+					  </ion-list>
+					  <br><br>
+
+					</div>
+
+					<div *ngSwitchCase="'info'">
+					  <!-- Show map here -->
+					  <!--<div  id="map-detail" class="map"  margin-bottom></div>-->
+						<!--&lt;!&ndash;<p ion-text text-center color="dark" class="fw700">{{info.address}}, {{info.phone}} {{info.time}}</p>&ndash;&gt;-->
+						<!--<hr margin-bottom>-->
+
+						<h2>
+							<span ion-text class="fw700">Address</span>
+						</h2>
+						<p ion-text margin-bottom>{{ info_a.address }}</p>
+
+						<h2>
+							<span ion-text class="fw700">Hours</span>
+						</h2>
+						<p ion-text margin-bottom>{{info_a.time}}</p>
+
+						<h2>
+							<span ion-text class="fw700">Phone</span>
+						</h2>
+						<p ion-text margin-bottom>{{info_a.phone}}</p>
+
+						<br><br>
+					</div>
+
+
+					<div *ngSwitchCase="'menu'">
+						<h2>
+							<span ion-text class="fw700">MAIN MENU</span>
+						</h2>
+						<br>
+						<ion-list>
+							<ion-item no-padding *ngFor="let menu of menus" >
+								<!--<ion-thumbnail item-start>-->
+								<!--<img src="{{dish.picture}}">-->
+								<!--</ion-thumbnail>-->
+
+
+								<h2  ion-text class="fw500"> {{menu.name}} : {{menu.price}} 원</h2>
+
+								<!--<h2 ion-text color="dark" class="fw500">{{menu.name}}</h2>-->
+								<!--<p ion-text color="primary" class="text-11x">{{ dish.ingredients }}</p>-->
+								<!--<button ion-button clear class="green-bg text-white" item-end>{{ dish.price | currency }}</button>-->
+							</ion-item>
+						</ion-list>
+
+						<!--<br><br><br><br>-->
+
+					</div>
+				</div>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+  </ion-card>
+
+  <ion-fab bottom right>
+    <button ion-fab round icon-only color="dark" (click)="openCart()">
+      <ion-icon name="cart" class="text-white"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>
