@@ -20,6 +20,7 @@ export class NearbyPage {
     storecode :Array<any>=[];
     map;
     markersGroup;
+    center : leaflet.PointTuple;
     public restCollection : any;
 	public  db = firebase.firestore();
     constructor(public navCtrl: NavController, public service: RestaurantService, public modalCtrl: ModalController, public geolocation: Geolocation) {
@@ -96,10 +97,31 @@ export class NearbyPage {
     ionViewDidLoad() {
         setTimeout(() => {
 			this.geolocation.getCurrentPosition().then(pos => {
-				this.map = leaflet.map("nearby-map").setView([pos.coords.latitude, pos.coords.longitude], 30);
+				this.center = [ pos.coords.latitude, pos.coords.longitude];
+				var p1 = new leaflet.latLng(pos.coords.latitude+0.0035,pos.coords.longitude+0.0035); //  [pos.coords.latitude+0.005,pos.coords.longitude+0.005];
+				var p2 = new leaflet.latLng(pos.coords.latitude-0.0035,pos.coords.longitude-0.0035);
+				var bounds =  new leaflet.latLngBounds(p1, p2);
+				this.map = leaflet.map("nearby-map",{
+					// Zoom: 30,
+					 minZoom:18,
+					// maxZoom : 50,
+					maxBounds : bounds
+				}).setView([pos.coords.latitude, pos.coords.longitude],100);
+				// this.map = leaflet.map("nearby-map").setView([pos.coords.latitude, pos.coords.longitude], 30);
+
 				leaflet.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+
 					attribution: 'Tiles &copy; Esri'
 				}).addTo(this.map);
+				var myIcon = leaflet.icon({
+					iconUrl: 'assets/leaflet/images/map-marker4.png'
+
+				});
+			//	L.marker([50.505, 30.57], {icon: myIcon}).addTo(map);
+				var marker = new leaflet.Marker(this.center, {icon:myIcon});
+
+				this.map.addLayer(marker);
+
 			var rest_a = this.restAsync().then(rest_a=> this.restaurants= rest_a).then(()=>{
 
 					this.showMarkers();
