@@ -106,7 +106,7 @@ export class NearbyPage {
 					 minZoom:18,
 					// maxZoom : 50,
 					maxBounds : bounds
-				}).setView([pos.coords.latitude, pos.coords.longitude],100);
+				}).setView([pos.coords.latitude, pos.coords.longitude],30);
 				// this.map = leaflet.map("nearby-map").setView([pos.coords.latitude, pos.coords.longitude], 30);
 
 				leaflet.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
