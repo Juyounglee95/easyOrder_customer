@@ -219,7 +219,7 @@ export class CartPage {
 
 		//
 	}
-	payment() {
+	payment(event) {
 		const param = {
 			pay_method : 'card',
 			merchant_uid : 'merchant_' + new Date().getTime(),
@@ -234,11 +234,20 @@ export class CartPage {
 		};
 
 		// 아임포트 관리자 페이지 가입 후 발급된 가맹점 식별코드를 사용
-		this.iamport.payment("imp94907252", param )
-			.then((response)=> {
+		this.iamport.payment("imp94907252",  {
+			pay_method : "card",
+			merchant_uid : this.owner + new Date().getTime(),
+			name : "주문명:결제테스트",
+			amount : this.totalprice,
+			app_scheme : "ionickcp" //플러그인 설치 시 사용한 명령어 "ionic cordova plugin add cordova-plugin-iamport-kcp --variable URL_SCHEME=ionickcp" 의 URL_SCHEME 뒤에 오는 값을 넣으시면 됩니다.
+		}).then((response)=> {
+				console.log(response);
 				if ( response.isSuccess() ) {
 					//TODO : 결제성공일 때 처리
-					console.log("$$$$$$$$$")
+					var success  = this.checkoutAsync().then(()=>{this.registerOrder();}).then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-home');}).catch();
+
+				}else{
+
 				}
 			})
 			.catch((err)=> {
