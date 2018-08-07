@@ -4,6 +4,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { foodIonicApp } from './app.component';
+import { InAppBrowser } from '@ionic-native/in-app-browser'
 
 import { PipesModule } from '../pipes/pipes.module';
 import {MessageService} from "../providers/message-service-mock";
@@ -56,6 +57,8 @@ import { IamportService } from 'iamport-ionic-kcp';
   	CameraPreview,
     OrdersService,
 	  IamportService,
+	  InAppBrowser,
+	  {provide: ErrorHandler, useClass: IonicErrorHandler},
 	  Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

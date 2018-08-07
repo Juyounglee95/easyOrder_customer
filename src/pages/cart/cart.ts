@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { CartService } from '../../providers/cart-service-mock';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 
 
 import * as firebase from "firebase";
@@ -35,7 +37,7 @@ export class CartPage {
 	total:number=0;
 	names:string='';
 	date:string='';
-	constructor(public navCtrl: NavController, public navParams: NavParams, public cartService: CartService,private alertCtrl: AlertController,  private http: HttpClient, public iamport: IamportService) {
+	constructor(public navCtrl: NavController, public navParams: NavParams, public cartService: CartService,private alertCtrl: AlertController,  private http: HttpClient, public iamport: IamportService, private theInAppBrowser: InAppBrowser) {
 		var table_a = this.get_t().then(table_a=> this.table= table_a);
 		var store_a = this.get_s().then(store_a=> this.store = store_a)
 			.then(()=>this.getmenu());
@@ -217,31 +219,32 @@ export class CartPage {
 
 		//
 	}
-	// payment() {
-	// 	const param = {
-	// 		pay_method : 'card',
-	// 		merchant_uid : 'merchant_' + new Date().getTime(),
-	// 		name : '주문명:결제테스트',
-	// 		amount : 1400,
-	// 		buyer_email : 'iamport@siot.do',
-	// 		buyer_name : '구매자이름',
-	// 		buyer_tel : '010-1234-5678',
-	// 		buyer_addr : '서울특별시 강남구 삼성동',
-	// 		buyer_postcode : '123-456',
-	// 		app_scheme : 'ionickcp' //플러그인 설치 시 사용한 명령어 "ionic cordova plugin add cordova-plugin-iamport-kcp --variable URL_SCHEME=ionickcp" 의 URL_SCHEME 뒤에 오는 값을 넣으시면 됩니다.
-	// 	};
-    //
-	// 	// 아임포트 관리자 페이지 가입 후 발급된 가맹점 식별코드를 사용
-	// 	this.iamport.payment("imp94907252", param )
-	// 		.then((response)=> {
-	// 			if ( response.isSuccess() ) {
-	// 				//TODO : 결제성공일 때 처리
-	// 			}
-	// 		})
-	// 		.catch((err)=> {
-	// 			alert(err)
-	// 		})
-	// 	;
-	// }
+	payment() {
+		const param = {
+			pay_method : 'card',
+			merchant_uid : 'merchant_' + new Date().getTime(),
+			name : '주문명:결제테스트',
+			amount : 1400,
+			buyer_email : 'iamport@siot.do',
+			buyer_name : '구매자이름',
+			buyer_tel : '010-1234-5678',
+			buyer_addr : '서울특별시 강남구 삼성동',
+			buyer_postcode : '123-456',
+			app_scheme : 'ionickcp' //플러그인 설치 시 사용한 명령어 "ionic cordova plugin add cordova-plugin-iamport-kcp --variable URL_SCHEME=ionickcp" 의 URL_SCHEME 뒤에 오는 값을 넣으시면 됩니다.
+		};
+
+		// 아임포트 관리자 페이지 가입 후 발급된 가맹점 식별코드를 사용
+		this.iamport.payment("imp94907252", param )
+			.then((response)=> {
+				if ( response.isSuccess() ) {
+					//TODO : 결제성공일 때 처리
+					console.log("$$$$$$$$$")
+				}
+			})
+			.catch((err)=> {
+				alert(err)
+			})
+		;
+	}
 
 }
