@@ -3,7 +3,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
-
 import { foodIonicApp } from './app.component';
 
 import { PipesModule } from '../pipes/pipes.module';
@@ -19,6 +18,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Keyboard } from '@ionic-native/keyboard';
 import {CameraPreview} from "@ionic-native/camera-preview";
 import { NgProgressModule} from "@ngx-progressbar/core";
+import { IamportService } from 'iamport-ionic-kcp';
 
 @NgModule({
   declarations: [
@@ -55,6 +55,7 @@ import { NgProgressModule} from "@ngx-progressbar/core";
     CartService,
   	CameraPreview,
     OrdersService,
+	  IamportService,
 	  Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
