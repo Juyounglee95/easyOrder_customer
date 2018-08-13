@@ -20,14 +20,17 @@ import { Keyboard } from '@ionic-native/keyboard';
 import {CameraPreview} from "@ionic-native/camera-preview";
 import { NgProgressModule} from "@ngx-progressbar/core";
 import { IamportService } from 'iamport-ionic-kcp';
-
+import {ReviewPage } from  '../pages/review/review';
+import { Ionic2RatingModule } from 'ionic2-rating';
 @NgModule({
   declarations: [
     foodIonicApp
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+	  Ionic2RatingModule,
     IonicModule.forRoot(foodIonicApp, {
     	preloadModules: true,
       scrollPadding: false,
@@ -39,11 +42,13 @@ import { IamportService } from 'iamport-ionic-kcp';
       driverOrder: ['indexeddb', 'sqlite', 'websql']
     }),
     PipesModule,
-	  NgProgressModule.forRoot()
+	  NgProgressModule.forRoot(),
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    foodIonicApp
+    foodIonicApp,
+
   ],
   providers: [
     StatusBar,

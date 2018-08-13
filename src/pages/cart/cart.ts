@@ -241,10 +241,12 @@ export class CartPage {
 			amount : this.totalprice,
 			app_scheme : "ionickcp" //플러그인 설치 시 사용한 명령어 "ionic cordova plugin add cordova-plugin-iamport-kcp --variable URL_SCHEME=ionickcp" 의 URL_SCHEME 뒤에 오는 값을 넣으시면 됩니다.
 		}).then((response)=> {
-				console.log(response);
+			//	console.log(response);
 				if ( response.isSuccess() ) {
 					//TODO : 결제성공일 때 처리
 					var success  = this.checkoutAsync().then(()=>{this.registerOrder();}).then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-home');}).catch();
+
+					console.log(response);
 
 				}else{
 

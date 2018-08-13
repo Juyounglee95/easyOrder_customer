@@ -16,13 +16,15 @@
 			<ion-col>
 				<ion-list>
 
-					<ion-item *ngFor="let dish of dishes" tapplable (click)="openDishDetail(dish)">
-					<ion-thumbnail item-start>
-						<img src="{{dish.picture}}">
-					</ion-thumbnail>
-					<h2 ion-text color="dark" class="fw500">{{dish.name}}</h2>
-					<p ion-text color="primary" class="text-11x">{{ dish.ingredients }}</p>
-					<button ion-button clear class="green-bg text-white" item-end>{{ dish.price | currency }}</button>
+					<ion-item *ngFor="let order of orders; let id = index" tapplable (click)="openReview(id)">
+					<!--<ion-thumbnail item-start>-->
+						<!--<img src="{{dish.picture}}">-->
+					<!--</ion-thumbnail>-->
+						<h2 ion-text color="dark" class="fw500">{{order.menu}}</h2>
+
+						<h2 ion-text color="dark" class="fw500">{{order.code}}</h2>
+					<p ion-text color="primary" class="text-11x">{{ order.time}}</p>
+					<!--<button ion-button clear class="green-bg text-white" item-end>{{ dish.price | currency }}</button>-->
 					</ion-item>
 
 				</ion-list>
