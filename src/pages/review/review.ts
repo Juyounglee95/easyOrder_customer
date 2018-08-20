@@ -25,6 +25,8 @@ export class ReviewPage {
 	date : any;
 	rate : any=0;
 	code : any;
+	id: any;
+
 	public  db = firebase.firestore();
   constructor(public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController) {
   	this.time = this.navParams.get("time");
@@ -32,7 +34,8 @@ export class ReviewPage {
 	  this.menu = this.navParams.get("menu");
 	  this.code = this.navParams.get("code");
 	  this.code= this.code.toString();
-  	// console.log(this.reviewtext);
+	  this.id = this.navParams.get("id");
+	  // console.log(this.reviewtext);
   }
 	onModelChange(event){
 		this.rate = event;
@@ -49,7 +52,7 @@ export class ReviewPage {
 			this.date = new Date().toUTCString();
 
 			var addDoc = this.db.collection('review').add({
-
+				orderDoc_id : this.id,
 				menu : this.menu,
 				star : this.rate,
 				time: this.date,
@@ -57,10 +60,17 @@ export class ReviewPage {
 				store_name:this.store,
 				store_code : this.code,
 				content: this.reviewtext
-			}).then(ref => {
+			}).then(ref=>{
+
+				var orderDoc = this.db.collection('order').where("id", "==", this.id);
+				
+				// var update= orderDoc.update({
+				// 	review : true
+				// })
+
 				resolve(success);
-		//		console.log('Added document with ID: ', ref.id);
-			});
+				console.log('Added document');
+			})
 
 			//   resolve(store);
 		})

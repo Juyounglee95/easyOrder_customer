@@ -46,6 +46,8 @@ export class DishListPage {
 							menu : doc.data().menu,
 							code : doc.data().store_code,
 							time : doc.data().timestamp,
+							id : doc.data().id,
+							review : doc.data().review
 							//status : doc.data().status
 						});
 					});
@@ -140,7 +142,8 @@ export class DishListPage {
     		'store': this.orders[id].code,
 			'menu': this.orders[id].menu,
 			'time': this.orders[id].time,
-			'code': this.code[id]
+			'code': this.code[id],
+			'id': this.orders[id].id
 		})
 	}
      openOrderList(){

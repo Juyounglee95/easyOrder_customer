@@ -124,7 +124,8 @@ export class CartPage {
 						totalprice : this.totalprice,
 						user : firebase.auth().currentUser.email,
 						store_code : this.store,
-						id:""
+						id:"",
+						review: false
 					}).then(function(docRef) {
 
 						console.log("Document written with ID: ", docRef.id);
