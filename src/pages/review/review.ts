@@ -62,8 +62,9 @@ export class ReviewPage {
 				content: this.reviewtext
 			}).then(ref=>{
 
-				var orderDoc = this.db.collection('order').where("id", "==", this.id);
-				
+				var orderDoc = this.db.collection('order');
+				var orderRef = orderDoc.where("id", "==", this.id);
+				console.log(orderRef.id);
 				// var update= orderDoc.update({
 				// 	review : true
 				// })
