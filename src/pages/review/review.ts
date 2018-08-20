@@ -50,7 +50,7 @@ export class ReviewPage {
 		return new Promise<any>(resolve => {
 			var success = "success";
 			this.date = new Date().toUTCString();
-
+			this.id = this.id.toString();
 			var addDoc = this.db.collection('review').add({
 				orderDoc_id : this.id,
 				menu : this.menu,
@@ -62,13 +62,6 @@ export class ReviewPage {
 				content: this.reviewtext
 			}).then(ref=>{
 
-				var orderDoc = this.db.collection('order');
-				var orderRef = orderDoc.where("id", "==", this.id);
-				console.log(orderRef.id);
-				// var update= orderDoc.update({
-				// 	review : true
-				// })
-
 				resolve(success);
 				console.log('Added document');
 			})
@@ -76,6 +69,19 @@ export class ReviewPage {
 			//   resolve(store);
 		})
 	}
+	updateOrder() {
+
+		var orderRef = this.db.collection('order').where("id", "==", this.id).onSnapshot(querySnapshot => {
+			querySnapshot.docChanges.forEach(change => {
+
+				const fooId = change.doc.id
+				this.db.collection('order').doc(fooId).update({review: true});
+				// do something with foo and fooId
+
+			})
+		});
+	}
+
 	presentAlert() {
 
 		let alert = this.alertCtrl.create({
@@ -85,7 +91,7 @@ export class ReviewPage {
 		alert.present();
 	}
   addReview(){
-	  var success  = this.addReviewAsync().then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-dish-list');}).catch();
+	  var success  = this.addReviewAsync().then(()=> this.updateOrder()).then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-dish-list');}).catch();
 	  //console.log("result:",success);
 
   	console.log(this.reviewtext);
