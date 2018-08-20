@@ -25,7 +25,7 @@
 						<h2 ion-text color="dark" class="fw500">{{order.code}}</h2>
 					<p ion-text color="primary" class="text-11x">{{ order.time}}</p>
 						<button *ngIf="!order.review" item-right ion-button small (click)="openReview(id)" >Write Review</button>
-						<button *ngIf="order.review" item-right ion-button small>Edit Review</button>
+						<button *ngIf="order.review" item-right ion-button small (click)="editReview(id)">Edit Review</button>
 					<!--<button ion-button clear class="green-bg text-white" item-end>{{ dish.price | currency }}</button>-->
 					</ion-item>
 

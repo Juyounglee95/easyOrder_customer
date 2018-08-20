@@ -1,0 +1,47 @@
+<!--
+  Generated template for the ReviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>Edit Review</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list>
+		<ion-item>
+			<ion-label>RESTAURANT INFO</ion-label>
+			<ion-label color="primary" >{{store}}</ion-label>
+			<ion-label color="primary" >{{time}}</ion-label>
+			<ion-label color="primary" >{{menu}}</ion-label>
+			<!--<ion-input [(ngModel)]="reviewtext" placeholder="Write Review"></ion-input>-->
+		</ion-item>
+		<ion-item>
+			<ion-label color="primary" >REVIEW</ion-label>
+
+			<ion-input [(ngModel)]="reviewtext" value={{content}}></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label color="primary">RATE</ion-label>
+
+		</ion-item>
+		<ion-item>
+			<rating [(ngModel)]="star"
+					readOnly="false"
+					max="5"
+					emptyStarIconName="star-outline"
+					halfStarIconName="star-half"
+					starIconName="star"
+					nullable="true"
+					(ngModelChange)="onModelChange($event)"> <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
+			</rating>
+		</ion-item>
+	</ion-list>
+	<button ion-button round (click)="addReview()">Edit Review</button>
+</ion-content>

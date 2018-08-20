@@ -36,7 +36,9 @@ export class ReviewPage {
 	  this.code= this.code.toString();
 	  this.id = this.navParams.get("id");
 	  // console.log(this.reviewtext);
+
   }
+
 	onModelChange(event){
 		this.rate = event;
 		console.log(event);
@@ -91,7 +93,7 @@ export class ReviewPage {
 		alert.present();
 	}
   addReview(){
-	  var success  = this.addReviewAsync().then(()=> this.updateOrder()).then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-dish-list');}).catch();
+	  var success  = this.addReviewAsync().then(()=> this.updateOrder()).then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-home');}).catch();
 	  //console.log("result:",success);
 
   	console.log(this.reviewtext);

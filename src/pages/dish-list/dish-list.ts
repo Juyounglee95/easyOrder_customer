@@ -28,6 +28,7 @@ export class DishListPage {
 		this.openOrderList();
     }
     //
+
 	async OrderListAsync(){
 		let orderlist = await this._orderlist();
 		return orderlist;
@@ -143,6 +144,12 @@ export class DishListPage {
 			'menu': this.orders[id].menu,
 			'time': this.orders[id].time,
 			'code': this.code[id],
+			'id': this.orders[id].id
+		})
+	}
+	editReview(id){
+		this.navCtrl.push('page-edit-review',{
+
 			'id': this.orders[id].id
 		})
 	}
