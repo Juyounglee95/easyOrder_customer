@@ -123,10 +123,17 @@ export class CartPage {
 						timestamp : this.date,
 						totalprice : this.totalprice,
 						user : firebase.auth().currentUser.email,
-						store_code : this.store
-					}).then(ref => {
+						store_code : this.store,
+						id:""
+					}).then(function(docRef) {
+
+						console.log("Document written with ID: ", docRef.id);
+					//	var docid = docRef.id.toString()
+						var setid = docRef.update({
+							id: docRef.id.toString()
+						})
 						resolve(success);
-						console.log('Added document with ID: ', ref.id);
+						console.log('Added document');
 					});
 
 			//   resolve(store);
