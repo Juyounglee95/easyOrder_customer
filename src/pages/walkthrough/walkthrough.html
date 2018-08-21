@@ -1,44 +1,33 @@
-<ion-content class="primary-bg">
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text>Entering Restaurant Code</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="lightest-bg">
+
 	<ion-grid no-padding fixed>
 		<ion-row no-padding>
-			<ion-col>
+			<ion-item margin-top="20px">
 
-			  <ion-slides pager="true" dir="{{dir}}">
-			    <ion-slide *ngFor="let slide of slideList">
-			      <ion-toolbar fixed>
-			        <ion-buttons end>
-			          <button ion-button color="light" (click)="onLastSlide()">Skip</button>
-			        </ion-buttons>
-			      </ion-toolbar>
-			      <img [src]="slide.image" class="slide-image">
-			      <h3 class="slide-title text-white" [innerHTML]="slide.title"></h3>
-			      <p [innerHTML]="slide.description" class="text-white"></p>
+				<ion-textarea [(ngModel)]="code" placeholder="ABC" maxlength="3"></ion-textarea>
 
-						<div padding>
-				      <button ion-button round block color="secondary" margin-top icon-end (click)="onSlideNext()">
-				      	Next
-				      	<ion-icon name="arrow-round-forward" color="light"></ion-icon>
-				    	</button>
-			    	</div>
-			    </ion-slide>
-			    <ion-slide>
-			      <ion-toolbar>
-			      </ion-toolbar>
-			      <img src="assets/img/foodIonic-ico.png" class="slide-image" margin-top>
-			      <h2 class="slide-title text-white">Ready to Lunch?</h2>
-
-			      <div padding>
-			        <button ion-button block round color="secondary" margin-top (click)="openAuthPage()">
-			          Sign In / Sign Up
-			        </button>
-			        <button ion-button block round color="dark" margin-top (click)="openHomePage()">
-			          Get Started
-			        </button>
-			      </div>
-			    </ion-slide>
-			  </ion-slides>
-
-			</ion-col>
+				<!--<ion-textarea placeholder="1" maxlength="1"></ion-textarea>-->
+				<!--<ion-textarea placeholder="2" maxlength="1"></ion-textarea>-->
+				<!--<ion-textarea placeholder="a" maxlength="1"></ion-textarea>-->
+				<!--<ion-textarea placeholder="5" maxlength="1"></ion-textarea>-->
+				<!--<ion-textarea placeholder="6" maxlength="1"></ion-textarea>-->
+			</ion-item>
 		</ion-row>
+		<button ion-button round margin-bottom="10px" (click)="inputTablecode()">
+			Confirm
+		</button>
+		<!--{{storemenu}}-->
 	</ion-grid>
-</ion-content>
+
+</ion-content>`

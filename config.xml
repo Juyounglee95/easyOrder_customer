@@ -101,4 +101,5 @@
         <variable name="URL_SCHEME" value="ionickcp" />
     </plugin>
     <engine name="ios" spec="^4.5.4" />
+    <engine name="android" spec="~7.0.0" />
 </widget>

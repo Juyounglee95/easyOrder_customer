@@ -1,8 +1,9 @@
 {
   "name": "foodIonic",
-  "app_id": "ef622600",
   "integrations": {
     "cordova": {}
   },
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "pro_id": "ef622600",
+  "app_id": ""
 }
