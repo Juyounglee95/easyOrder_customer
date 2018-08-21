@@ -97,12 +97,25 @@ export class RestaurantListPage {
 	_check():Promise<any>{
 		return new Promise<any>(resolve => {
 			var wn = 0;
+			let date : String = new Date().toUTCString();
+			let time : any;
 			var addDoc = this.db.collection(this.store).add({
-					user: firebase.auth().currentUser.email
+				user: firebase.auth().currentUser.email,
+				timestamp : date
 				}
 			).then(success => {
 				this.db.collection(this.store).get().then(function(querySnapshot) {
-					resolve(querySnapshot.size);
+					querySnapshot.forEach(doc => {
+						if(doc.data().user == firebase.auth().currentUser.email){
+							time=doc.data().timestamp;
+						}
+					});
+					querySnapshot.forEach(doc =>{
+						if(time>doc.data().timestamp){
+							wn++;
+						}
+					});
+				resolve(wn);
 				});
 			});
 		})
@@ -110,8 +123,19 @@ export class RestaurantListPage {
 	_start():Promise<any>{
 		return new Promise<any>(resolve => {
 			var wn = 0;
+			let time : any;
 			this.db.collection(this.store).get().then(function(querySnapshot) {
-				resolve(querySnapshot.size);
+				querySnapshot.forEach(doc => {
+					if(doc.data().user == firebase.auth().currentUser.email){
+						time=doc.data().timestamp;
+					}
+				});
+				querySnapshot.forEach(doc =>{
+					if(time>doc.data().timestamp){
+						wn++;
+					}
+				});
+				resolve(wn);
 			});
 		})
 	}
