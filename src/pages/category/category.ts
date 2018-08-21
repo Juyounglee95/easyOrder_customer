@@ -94,8 +94,8 @@ export class CategoryPage {
 				this.storeCollection = this.db.collection("store");
 				var store_a = this.storeAsync().then(store_a=> this.store = store_a)
 					.then(()=>{
-						if(this.table!=undefined&& this.store[0]!= undefined){
-							this.navCtrl.push('page-restaurant-list',{store_code :this.store, table_num: this.table});
+						if(this.store[0]!= undefined){
+							this.navCtrl.push('page-restaurant-list',{store_code :this.store});
 						}
 						else{
 							let alert = this.forgotCtrl.create({
