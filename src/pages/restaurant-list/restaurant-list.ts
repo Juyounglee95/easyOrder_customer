@@ -54,7 +54,16 @@ export class RestaurantListPage {
 		var abc =this.startAsync().then(num => this.waitingNumber = num);
 	}
 	waiting(){
-		var abc =this.checkoutAsync().then(num => this.waitingNumber = num);
+		var abc =this.checkoutAsync().then(num => {
+			console.log("num:"+num)
+			if(num==-1){
+
+			}else{
+				var wait = this.waitAsync().then(wm => {
+					this.waitingNumber=wm;
+				})
+			}
+		});
 
 		// var success  = this.checkoutAsync().then(()=>{this.registerOrder();}).then(()=>{this.navCtrl.push('page-home');}).catch();
 	}
@@ -94,48 +103,65 @@ export class RestaurantListPage {
 		let check = await this._start();
 		return check;
 	}
+	async waitAsync(){
+		let wait = await this._wait();
+		return wait;
+	}
+	_wait():Promise<any>{
+		return new Promise<any>(resolve => {
+			let order = 0;
+			let size = 0;
+			this.db.collection(this.store).get().then(function(querySnapshot) {
+				querySnapshot.forEach(doc => {
+					if(size<doc.data().order){
+						size=doc.data().order
+					}
+				});
+				size = size+1;
+			}).then(success=>{
+				var addDoc = this.db.collection(this.store).add({
+					user: firebase.auth().currentUser.email,
+					order : size
+				}).then(success=>{
+					resolve(size);
+				});
+			})
+		});
+	}
+
 	_check():Promise<any>{
 		return new Promise<any>(resolve => {
-			var wn = 0;
-			let date : String = new Date().toUTCString();
-			let time : any;
-			var addDoc = this.db.collection(this.store).add({
-				user: firebase.auth().currentUser.email,
-				timestamp : date
-				}
-			).then(success => {
-				this.db.collection(this.store).get().then(function(querySnapshot) {
-					querySnapshot.forEach(doc => {
-						if(doc.data().user == firebase.auth().currentUser.email){
-							time=doc.data().timestamp;
-						}
-					});
-					querySnapshot.forEach(doc =>{
-						if(time>doc.data().timestamp){
-							wn++;
-						}
-					});
-				resolve(wn);
+			this.db.collection(this.store).get().then(function(querySnapshot) {
+				querySnapshot.forEach(doc => {
+					console.log(doc.data().user)
+					if(doc.data().user == firebase.auth().currentUser.email){
+						resolve(-1);
+					}
 				});
-			});
-		})
+				resolve(1);
+			})
+		});
 	}
 	_start():Promise<any>{
 		return new Promise<any>(resolve => {
 			var wn = 0;
-			let time : any;
+			let order : number=0;
 			this.db.collection(this.store).get().then(function(querySnapshot) {
 				querySnapshot.forEach(doc => {
-					if(doc.data().user == firebase.auth().currentUser.email){
-						time=doc.data().timestamp;
+					if(doc.data().user === firebase.auth().currentUser.email){
+						order=doc.data().order;
 					}
 				});
-				querySnapshot.forEach(doc =>{
-					if(time>doc.data().timestamp){
-						wn++;
-					}
-				});
-				resolve(wn);
+				if(order==0){
+					resolve(querySnapshot.size);
+				}else{
+					querySnapshot.forEach(doc =>{
+						if(order>doc.data().order){
+							wn++;
+						}
+					});
+					resolve(wn);
+				}
 			});
 		})
 	}
