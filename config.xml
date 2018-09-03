@@ -100,7 +100,7 @@
     <plugin name="cordova-plugin-iamport-kcp" spec="^0.9.2">
         <variable name="URL_SCHEME" value="ionickcp" />
     </plugin>
+    <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^2.2.4" />
     <engine name="ios" spec="^4.5.4" />
     <engine name="android" spec="7.0.0" />
-    <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="^2.2.4" />
 </widget>

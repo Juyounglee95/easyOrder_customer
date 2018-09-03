@@ -22,6 +22,7 @@ import { NgProgressModule} from "@ngx-progressbar/core";
 import { IamportService } from 'iamport-ionic-kcp';
 import {ReviewPage } from  '../pages/review/review';
 import { Ionic2RatingModule } from 'ionic2-rating';
+import {FCM} from "@ionic-native/fcm";
 @NgModule({
   declarations: [
     foodIonicApp
@@ -59,6 +60,7 @@ import { Ionic2RatingModule } from 'ionic2-rating';
     CategoryService,
     MessageService,
     CartService,
+	  FCM,
   	CameraPreview,
     OrdersService,
 	  IamportService,
