@@ -3,6 +3,7 @@ import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import * as firebase from 'firebase';
+import { FCM } from '@ionic-native/fcm';
 
 export interface MenuItem {
     title: string;
@@ -28,7 +29,7 @@ export class foodIonicApp {
 
   	tabsPlacement: string = 'bottom';
   	tabsLayout: string = 'icon-top';
-
+	email:string='';
     rootPage: any = 'page-auth';
 
     showMenu: boolean = true;
@@ -48,13 +49,40 @@ export class foodIonicApp {
     accountMenuItems: Array<MenuItem>;
 
     helpMenuItems: Array<MenuItem>;
+	public  db :any;
 
-    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
-        this.initializeApp();
+    constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,private fcm: FCM) {
 		firebase.initializeApp(config);
 		firebase.auth().onAuthStateChanged((user)=>{
 			if(user){
 				this.rootPage = 'page-home';
+				this.email=user.email;
+				this.platform.ready().then(() => {
+					this.db=firebase.firestore();
+					this.fcm.getToken().then(token => {
+						// Your best bet is to here store the token on the user's profile on the
+						// Firebase database, so that when you want to send notifications to this
+						// specific user you can do it from Cloud Functions.
+					});
+					this.fcm.subscribeToTopic(this.email);
+					this.fcm.onNotification().subscribe(data => {
+						if (data.wasTapped) {
+							console.log("Received in background");
+						} else {
+							console.log("Received in foreground");
+						}
+					});
+					this.fcm.onTokenRefresh().subscribe(token => {
+						console.log(token);
+					});
+
+					this.statusBar.overlaysWebView(false);
+					this.splashScreen.hide();
+				});
+				if (!this.platform.is('mobile')) {
+					this.tabsPlacement = 'top';
+					this.tabsLayout = 'icon-left';
+				}
 			}else{
 				this.rootPage = 'page-auth';
 			}
