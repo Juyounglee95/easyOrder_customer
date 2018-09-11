@@ -107,7 +107,7 @@ export class RestaurantDetailPage {
 				.then(snapshot => {
 					snapshot.forEach(doc => {
 						menu.push({
-							name : doc.data().name,
+							name : doc.data().menu,
 							price : doc.data().price
 						});
 					});
