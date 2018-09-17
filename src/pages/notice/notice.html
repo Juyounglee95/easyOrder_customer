@@ -1,0 +1,48 @@
+<ion-header margin-bottom="50px" >
+
+	<ion-navbar>
+		<ion-title>Notice List</ion-title>
+	</ion-navbar>
+
+</ion-header >
+
+
+<ion-content margin-top="200px" *ngFor="let review of orders; let id = index">
+	<br><br>
+	<ion-card>
+		<h2 class ="fw700">{{review.store}}</h2>
+		<ion-list class="list-full-border">
+			<ion-item  margin-bottom text-wrap>
+
+				<h2 >
+					Title : {{ review.title }}
+				</h2>
+
+				<p ion-text>
+					Content : {{ review.content }}
+				</p>
+			</ion-item>
+		</ion-list>
+
+	</ion-card>
+</ion-content>
+
+<!--<ion-footer class="no-padding dark-bg">-->
+	<!--<ion-grid no-padding fixed>-->
+		<!--<ion-row no-padding>-->
+			<!--&lt;!&ndash;<button ion-button icon-left block color="primary" (click)="openNearbyPage()" class="col col-4">&ndash;&gt;-->
+			<!--&lt;!&ndash;<ion-icon name="compass" class="text-18x"></ion-icon>&ndash;&gt;-->
+			<!--&lt;!&ndash;<span ion-text class="text-12x">Nearby</span>&ndash;&gt;-->
+			<!--&lt;!&ndash;</button>&ndash;&gt;-->
+			<!--<button ion-button icon-left block color="primary" (click)="openCategoryPage()" class="col col-4">-->
+				<!--<ion-icon name="list-box" class="text-18x"></ion-icon>-->
+				<!--<span ion-text class="text-12x">Enroll Notice</span>-->
+			<!--</button>-->
+			<!--&lt;!&ndash;<button ion-button icon-left block color="primary" (click)="openOrders()" class="col col-4">&ndash;&gt;-->
+			<!--&lt;!&ndash;<ion-icon name="camera" class="text-18x"></ion-icon>&ndash;&gt;-->
+			<!--&lt;!&ndash;<span ion-text class="text-12x">Order</span>&ndash;&gt;-->
+			<!--&lt;!&ndash;</button>&ndash;&gt;-->
+		<!--</ion-row>-->
+	<!--</ion-grid>-->
+
+<!--</ion-footer>-->

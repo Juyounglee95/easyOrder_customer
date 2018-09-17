@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "1063191754261",
+    "firebase_url": "https://easyordercustomer.firebaseio.com",
+    "project_id": "easyordercustomer",
+    "storage_bucket": "easyordercustomer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063191754261:android:22e7835e77e12788",
+        "android_client_info": {
+          "package_name": "com.ionicframework.easyOrder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063191754261-vi9ocnqrp9uhf9f69ph0pe0j042bcv0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBcStspQGb6TZSiQVVmdtLn0I2EHgO2Uo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063191754261:android:ed123161296e4f5c",
+        "android_client_info": {
+          "package_name": "com.ionicframework.easyOrderB"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063191754261-vi9ocnqrp9uhf9f69ph0pe0j042bcv0q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBcStspQGb6TZSiQVVmdtLn0I2EHgO2Uo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

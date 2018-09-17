@@ -53,6 +53,34 @@ export class RestaurantListPage {
     start(){
 		var abc =this.startAsync().then(num => this.waitingNumber = num);
 	}
+	async startAsync(){
+		let check = await this._start();
+		return check;
+	}
+	_start():Promise<any>{
+		return new Promise<any>(resolve => {
+			var wn = 0;
+			let order : number=0;
+			this.db.collection(this.store).get().then(function(querySnapshot) {
+				querySnapshot.forEach(doc => {
+					if(doc.data().user == firebase.auth().currentUser.email){
+						order=doc.data().order;
+					}
+				});
+				if(order==0){
+					resolve(querySnapshot.size);
+				}else{
+					querySnapshot.forEach(doc =>{
+						if(order>doc.data().order){
+							wn++;
+						}
+					});
+					resolve(wn);
+				}
+			});
+		})
+	}
+
 	waiting(){
 		var abc =this.checkoutAsync().then(num => {
 			console.log("num:"+num)
@@ -64,45 +92,27 @@ export class RestaurantListPage {
 				})
 			}
 		});
-
-		// var success  = this.checkoutAsync().then(()=>{this.registerOrder();}).then(()=>{this.navCtrl.push('page-home');}).catch();
 	}
-	// start(){
-	// 	var success  = this.checkoutAsync().then(()=>{this.registerOrder();}).then(()=>{this.navCtrl.push('page-home');}).catch();
-	// }
-	// registerOrder(){
-	// 	console.log(this.owner)
-    //
-	// 	let body = {
-	// 		"notification":{
-	// 			"title":"New waiting is arrived",
-	// 			"body":this.order,
-	// 			"sound":"default",
-	// 			"click_action":"FCM_PLUGIN_ACTIVITY",
-	// 			"icon":"fcm_push_icon"
-	// 		},
-	// 		"data":{
-    //
-	// 		},
-	// 		"to":"/topics/"+this.store,
-	// 		"priority":"high",
-	// 		"restricted_package_name":""
-	// 	}
-	// 	let options = new HttpHeaders().set('Content-Type','application/json');
-	// 	this.http.post("https://fcm.googleapis.com/fcm/send",body,{
-	// 		headers: options.set('Authorization', 'key=AAAA94sqthU:APA91bF4quIXvQYLJlwp3mNMh6HdYpTGoDIIVOODLheD5LcLdge-JZhe4N2AaQjVMtqwDdQGhaXW4BMhkpEW9SuTwYWBuASd1bZGSaB_Me9sw3cCcUNlYa7NetC-BkX5OaBsLqFEJgRC'),
-	// 	})
-	// 		.subscribe();
-	// }
 
 	async checkoutAsync(){
 		let check = await this._check();
 		return check;
 	}
-	async startAsync(){
-		let check = await this._start();
-		return check;
+
+	_check():Promise<any>{
+		return new Promise<any>(resolve => {
+			this.db.collection(this.store).get().then(function(querySnapshot) {
+				querySnapshot.forEach(doc => {
+					console.log(doc.data().user)
+					if(doc.data().user == firebase.auth().currentUser.email){
+						resolve(-1);
+					}
+				});
+				resolve(1);
+			})
+		});
 	}
+
 	async waitAsync(){
 		let wait = await this._wait();
 		return wait;
@@ -128,44 +138,4 @@ export class RestaurantListPage {
 			})
 		});
 	}
-
-	_check():Promise<any>{
-		return new Promise<any>(resolve => {
-			this.db.collection(this.store).get().then(function(querySnapshot) {
-				querySnapshot.forEach(doc => {
-					console.log(doc.data().user)
-					if(doc.data().user == firebase.auth().currentUser.email){
-						resolve(-1);
-					}
-				});
-				resolve(1);
-			})
-		});
-	}
-	_start():Promise<any>{
-		return new Promise<any>(resolve => {
-			var wn = 0;
-			let order : number=0;
-			this.db.collection(this.store).get().then(function(querySnapshot) {
-				querySnapshot.forEach(doc => {
-					if(doc.data().user === firebase.auth().currentUser.email){
-						order=doc.data().order;
-					}
-				});
-				if(order==0){
-					resolve(querySnapshot.size);
-				}else{
-					querySnapshot.forEach(doc =>{
-						if(order>doc.data().order){
-							wn++;
-						}
-					});
-					resolve(wn);
-				}
-			});
-		})
-	}
-
-
-
 }
