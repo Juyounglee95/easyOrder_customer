@@ -67,8 +67,8 @@ export class RestaurantListPage {
 						order=doc.data().order;
 					}
 				});
-				if(order==0){
-					resolve(querySnapshot.size);
+				if(order==0 || order==null){
+					resolve(0);
 				}else{
 					querySnapshot.forEach(doc =>{
 						if(order>doc.data().order){
@@ -123,7 +123,7 @@ export class RestaurantListPage {
 			let size = 0;
 			this.db.collection(this.store).get().then(function(querySnapshot) {
 				querySnapshot.forEach(doc => {
-					if(size<doc.data().order){
+					if(size<doc.data().order && doc.data().order!=null){
 						size=doc.data().order
 					}
 				});
