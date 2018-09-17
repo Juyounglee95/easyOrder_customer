@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, AlertController, MenuController, ToastController, PopoverController, ModalController } from 'ionic-angular';
 
 import {RestaurantService} from '../../providers/restaurant-service-mock';
-
+import * as firebase from "firebase";
+import 'firebase/firestore'
 @IonicPage({
 	name: 'page-home',
 	segment: 'home',
@@ -18,8 +19,10 @@ export class HomePage {
 
   restaurants: Array<any>;
   searchKey: string = "";
+  thumbnail=["assets/img/restaurants/burgerking.png", "assets/img/restaurants/zzomae.png"];
   yourLocation: string = "Gongreung 58 130, Seoul";
-
+	public restCollection : any;
+	public  db = firebase.firestore();
   constructor(public navCtrl: NavController, public menuCtrl: MenuController, public popoverCtrl: PopoverController, public locationCtrl: AlertController, public modalCtrl: ModalController, public toastCtrl: ToastController, public service: RestaurantService) {
 		this.menuCtrl.swipeEnable(true, 'authenticated');
 		this.menuCtrl.enable(true);
@@ -47,9 +50,10 @@ export class HomePage {
     this.navCtrl.push('page-cart');
   }
 
-	openRestaurantDetail(restaurant: any) {
+	openRestaurantDetail(id: any) {
+
   	this.navCtrl.push('page-restaurant-detail', {
-			'id': restaurant.id
+			'id': this.restaurants[id].location
 		});
 	}
 
@@ -77,13 +81,47 @@ export class HomePage {
 	    this.findAll();
 	}
 
-	findAll() {
-	    this.service.findAll()
-	        .then(data => this.restaurants = data)
-	        .catch(error => alert(error));
+	async restAsync(){
+		let val  = await this._rest();
+		return val;
 	}
 
-  alertLocation() {
+	_rest():Promise<any> {
+		return new Promise<any>(resolve => {
+			var rest:Array<any>=[];
+			var store : Array<any>=[];
+			this.restCollection = this.db.collection("store").get().then(function (querySnapshot) {
+				querySnapshot.forEach(function (doc) {
+					rest.push({
+						name: doc.data().name,
+						info : doc.data().info,
+						location : doc.data().location
+					} );
+					resolve(rest);
+				})
+
+			})
+
+
+		})
+	}
+	findAll() {
+		var rest_a = this.restAsync().then(rest_a=> this.restaurants= rest_a).catch();
+		console.log(this.restaurants);
+		// this.db.collection("store").get().then(function(querySnapshot) {
+		// 	querySnapshot.forEach(function(doc) {
+		// 		// doc.data() is never undefined for query doc snapshots
+		// 		this.restaurants.push(doc.data().location);
+		// 		console.log(doc.id, " => ", doc.data().location);
+		// 	});
+		// });
+		// this.service.findAll()
+		//     .then(data => this.restaurants = data)
+		//     .catch(error => alert(error));
+	}
+
+
+	alertLocation() {
     let changeLocation = this.locationCtrl.create({
       title: 'Change Location',
       message: "Type your Address to change restaurant list in that area.",

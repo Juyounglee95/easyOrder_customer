@@ -113,14 +113,14 @@ export class foodIonicApp {
 
         this.accountMenuItems = [
             {title: 'Login', component: 'page-auth', icon: 'log-in'},
-            {title: 'My Account', component: 'page-my-account', icon: 'contact'},
+          {title: 'My Account', component: 'page-my-account', icon: 'contact'},
             {title: 'Logout', component: 'page-auth', icon: 'log-out'},
         ];
 
         this.helpMenuItems = [
             {title: 'About', component: 'page-about', icon: 'information-circle'},
             {title: 'Support', component: 'page-support', icon: 'call'},
-            {title: 'App Settings', component: 'page-settings', icon: 'cog'},
+            //{title: 'App Settings', component: 'page-settings', icon: 'cog'},
             // {title: 'Walkthrough', component: 'page-walkthrough', icon: 'photos'}
         ];
 
