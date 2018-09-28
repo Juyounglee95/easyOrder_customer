@@ -61,25 +61,6 @@ export class CartPage {
 	}
 
 	registerOrder(){
-		console.log(this.owner)
-		// var names = "";
-		// var price = this.totalprice;
-		// let date : String = new Date().toUTCString();
-		// for(let data of this.menus) {
-		// 	names += data.name +' : '+ data.status+' ';
-		// }
-        //
-		// var addDoc = this.db.collection('order').add({
-		// 	menu : names,
-		// 	status : true,
-		// 	table_num : this.table,
-		// 	timestamp : date,
-		// 	totalprice : price,
-		// 	user : firebase.auth().currentUser.email
-		// }).then(ref => {
-		// 	console.log('Added document with ID: ', ref.id);
-		// });
-
 		let body = {
 			"notification":{
 				"title":"New order is arrived",
@@ -89,13 +70,6 @@ export class CartPage {
 				"icon":"fcm_push_icon"
 			},
 			"data":{
-				// menu : this.names,
-				// status : true,
-				// table_num : this.table,
-				// timestamp : this.date,
-				// totalprice : this.totalprice,
-				// user : firebase.auth().currentUser.email,
-				// store_code : this.store
 			},
 			"to":"/topics/"+this.store,
 			"priority":"high",
@@ -103,7 +77,7 @@ export class CartPage {
 		}
 		let options = new HttpHeaders().set('Content-Type','application/json');
 		this.http.post("https://fcm.googleapis.com/fcm/send",body,{
-			headers: options.set('Authorization', 'key=AAAA94sqthU:APA91bF4quIXvQYLJlwp3mNMh6HdYpTGoDIIVOODLheD5LcLdge-JZhe4N2AaQjVMtqwDdQGhaXW4BMhkpEW9SuTwYWBuASd1bZGSaB_Me9sw3cCcUNlYa7NetC-BkX5OaBsLqFEJgRC'),
+			headers: options.set('Authorization', 'key=AAAA94sqthU:APA91bHr4vPUOBDnGep_qDQu6Ig0UHad3QzYBm48v_BHd76kgvIeN7LpPNzztnoy1cLhpNq3D9gDqoKjRqSt1hbVn_BGVBWdsreoo_bikkczQxJSLPSArC3dwLQfpbeZSGfC0xexfDAQ'),
 		})
 			.subscribe();
 	}

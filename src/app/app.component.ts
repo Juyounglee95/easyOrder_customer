@@ -64,8 +64,9 @@ export class foodIonicApp {
 						// Firebase database, so that when you want to send notifications to this
 						// specific user you can do it from Cloud Functions.
 					});
-					console.log(this.email);
-					this.fcm.subscribeToTopic(this.email).catch(reason => {});
+					let email = this.email.replace('@','').replace('.','')
+					console.log('email:'+email)
+					this.fcm.subscribeToTopic(email).catch(reason => {});
 					this.fcm.onNotification().subscribe(data => {
 						if (data.wasTapped) {
 							console.log("Received in background");
