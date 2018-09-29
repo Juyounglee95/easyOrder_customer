@@ -103,7 +103,7 @@ export class CartPage {
 		}
 		let options = new HttpHeaders().set('Content-Type','application/json');
 		this.http.post("https://fcm.googleapis.com/fcm/send",body,{
-			headers: options.set('Authorization', 'key=AAAA94sqthU:APA91bF4quIXvQYLJlwp3mNMh6HdYpTGoDIIVOODLheD5LcLdge-JZhe4N2AaQjVMtqwDdQGhaXW4BMhkpEW9SuTwYWBuASd1bZGSaB_Me9sw3cCcUNlYa7NetC-BkX5OaBsLqFEJgRC'),
+			headers: options.set('Authorization', 'key=AAAA94sqthU:APA91bHr4vPUOBDnGep_qDQu6Ig0UHad3QzYBm48v_BHd76kgvIeN7LpPNzztnoy1cLhpNq3D9gDqoKjRqSt1hbVn_BGVBWdsreoo_bikkczQxJSLPSArC3dwLQfpbeZSGfC0xexfDAQ'),
 		})
 			.subscribe();
 	}
