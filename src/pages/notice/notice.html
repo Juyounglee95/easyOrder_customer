@@ -1,31 +1,32 @@
-<ion-header margin-bottom="50px" >
-
-	<ion-navbar>
-		<ion-title>Notice List</ion-title>
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text class="fw700">Notice List</span>
+		</ion-title>
 	</ion-navbar>
+</ion-header>
 
-</ion-header >
 
+<ion-content margin-top="200px" >
 
-<ion-content margin-top="200px" *ngFor="let review of orders; let id = index">
-	<br><br>
 	<ion-card>
-		<h2 class ="fw700">{{review.store}}</h2>
-		<ion-list class="list-full-border">
-			<ion-item  margin-bottom text-wrap>
-
-				<h2 >
-					Title : {{ review.title }}
-				</h2>
-
-				<p ion-text>
-					Content : {{ review.content }}
-				</p>
+		<ion-list class="list-full-border" *ngFor="let review of orders; let id = index">
+			<ion-item >
+				<ion-card-content>
+					<h2 >
+						Title : {{ review.title }}
+					</h2>
+					<p ion-text>
+						Content : {{ review.content }}
+					</p>
+					<span ion-text class="author text-11x"> WHEN {{ review.timeStamp }}</span>
+				</ion-card-content>
 			</ion-item>
 		</ion-list>
-
 	</ion-card>
-</ion-content>
 
 <!--<ion-footer class="no-padding dark-bg">-->
 	<!--<ion-grid no-padding fixed>-->
