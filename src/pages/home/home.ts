@@ -19,7 +19,7 @@ export class HomePage {
 
   restaurants: Array<any>;
   searchKey: string = "";
-  thumbnail=["assets/img/restaurants/burgerking.png", "assets/img/restaurants/zzomae.png"];
+  thumbnail=["assets/img/restaurants/1.png", "assets/img/restaurants/zzomae.png"];
   yourLocation: string = "Gongreung 58 130, Seoul";
 	public restCollection : any;
 	public  db = firebase.firestore();
@@ -51,7 +51,7 @@ export class HomePage {
   }
 
 	openRestaurantDetail(id: any) {
-
+		console.log(this.restaurants[id].location);
   	this.navCtrl.push('page-restaurant-detail', {
 			'id': this.restaurants[id].location
 		});
@@ -94,7 +94,8 @@ export class HomePage {
 				querySnapshot.forEach(function (doc) {
 					rest.push({
 						name: doc.data().name,
-						info : doc.data().info,
+						address : doc.data().address,
+						hours : doc.data().hours,
 						location : doc.data().location
 					} );
 					resolve(rest);

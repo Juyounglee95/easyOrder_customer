@@ -19,7 +19,6 @@ import 'firebase/firestore'
 })
 export class RestaurantDetailPage {
 	param: any;
-
     map;
     markersGroup;
     restaurant: any;
@@ -46,16 +45,10 @@ export class RestaurantDetailPage {
 			this.lat = restloc[0];
 			this.long = restloc[1];
 			this.getinfo();
-			//this.showMap();
-		//	this.getmenu();
-			//this.restaurant = this.restaurantService.getItem(this.param) ? this.restaurantService.getItem(this.param) : this.restaurantService.getRestaurants()[0];
-      //this.dishes = this.dishService.findAll()
     }
 
 	getinfo(){
 		var info_a = this.infoAsync().then(info_a=> this.info= info_a);
-
-
 	}
 
 	async infoAsync(){
@@ -65,31 +58,21 @@ export class RestaurantDetailPage {
 
 	_info():Promise<any> {
 		return new Promise<any>(resolve => {
-
 			var info :Array<any>=[];
-
 			this.db.collection("store").where("location", "==", this.param).onSnapshot(function (querySnapshot) {
 				querySnapshot.forEach(function (doc) {
-					var det = doc.data().info.split(",");
-					var address_a = det[0];
-					var time_a = det[1];
 					info.push({
 						code : doc.data().code,
 						name: doc.data().name,
 						phone : doc.data().phone,
-						address : address_a,
-						time: time_a
+						address : doc.data().address,
+						time: doc.data().hours
 					})
-					console.log(info);
-					resolve(info)
-
-				})
+				});
+				resolve(info);
 			})
-
-
 		})
 	}
-
 
 	getmenu(){
 		var menu_a = this.menuAsync().then(menu_a=> this.menus= menu_a)
@@ -159,49 +142,6 @@ export class RestaurantDetailPage {
 				'id': dish.id
 			});
     }
-
-    favorite(restaurant) {
-        this.restaurantService.favorite(restaurant)
-            .then(restaurant => {
-                let toast = this.toastCtrl.create({
-                    message: 'Restaurant added to your favorites',
-                    cssClass: 'mytoast',
-                    duration: 2000
-                });
-                toast.present(toast);
-            });
-    }
-
-    share(restaurant) {
-        let actionSheet: ActionSheet = this.actionSheetCtrl.create({
-            title: 'Share via',
-            buttons: [
-                {
-                    text: 'Twitter',
-                    handler: () => console.log('share via twitter')
-                },
-                {
-                    text: 'Facebook',
-                    handler: () => console.log('share via facebook')
-                },
-                {
-                    text: 'Email',
-                    handler: () => console.log('share via email')
-                },
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: () => console.log('cancel share')
-                }
-            ]
-        });
-
-        actionSheet.present();
-    }
-
-	  openCart() {
-	    this.navCtrl.push('page-cart');
-	  }
 
     showMarkers() {
         if (this.markersGroup) {
