@@ -26,7 +26,6 @@ import {FCM} from "@ionic-native/fcm";
 @NgModule({
   declarations: [
     foodIonicApp
-
   ],
   imports: [
     BrowserModule,

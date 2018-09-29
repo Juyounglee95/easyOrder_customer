@@ -61,25 +61,6 @@ export class CartPage {
 	}
 
 	registerOrder(){
-		console.log(this.owner)
-		// var names = "";
-		// var price = this.totalprice;
-		// let date : String = new Date().toUTCString();
-		// for(let data of this.menus) {
-		// 	names += data.name +' : '+ data.status+' ';
-		// }
-        //
-		// var addDoc = this.db.collection('order').add({
-		// 	menu : names,
-		// 	status : true,
-		// 	table_num : this.table,
-		// 	timestamp : date,
-		// 	totalprice : price,
-		// 	user : firebase.auth().currentUser.email
-		// }).then(ref => {
-		// 	console.log('Added document with ID: ', ref.id);
-		// });
-
 		let body = {
 			"notification":{
 				"title":"New order is arrived",
@@ -89,13 +70,6 @@ export class CartPage {
 				"icon":"fcm_push_icon"
 			},
 			"data":{
-				// menu : this.names,
-				// status : true,
-				// table_num : this.table,
-				// timestamp : this.date,
-				// totalprice : this.totalprice,
-				// user : firebase.auth().currentUser.email,
-				// store_code : this.store
 			},
 			"to":"/topics/"+this.store,
 			"priority":"high",
