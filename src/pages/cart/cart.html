@@ -22,32 +22,34 @@
 				<!--</ion-card>-->
 
 				<ion-list no-margin>
-					<h2 ion-text color="dark" class="fw700">TABLE NUMBER : {{table}}</h2>
+					<h2 style="text-align: center" ion-text color="dark" class="fw700">TABLE NUMBER : {{table}}</h2>
 					<ion-item-sliding *ngFor="let menu of menus; let id = index">
 						<div ion-item >
 							<!--<ion-thumbnail item-left>-->
 							<!--<img src="{{order.order.picture}}"/>-->
 							<!--</ion-thumbnail>-->
-							<h2 ion-text color="dark" class="fw700">{{menu.name}} : \{{menu.price}}</h2>
 							<!--<h2 ion-text color="dark" class="fw700">{{menu.price}}</h2>-->
-							<ion-grid class="filters" no-padding>
-							<ion-row>
-							<ion-col text-center col-2>
-							<!--[hidden]="order.qtd < 2"-->
-							<ion-icon name="remove-circle" class="text-22x" tappable (click)="minusQtd(id)"   color="secondary"></ion-icon>
-							<!--<button ion-button color="danger" (click)="minusQtd()">MINUS</button>-->
-							</ion-col>
-							<ion-col text-center col-3>
-							<h2 ion-text color="dark" class="fw700">{{menu.status}}</h2>
-							<!--<h2 ion-text color="primary" class="text-18x">-->
-							<!--<span>{{ order.qtd }}</span>-->
-							<!--</h2>-->
-							</ion-col>
-							<ion-col text-center col-2>
-							<ion-icon name="add-circle" class="text-22x"  tappable (click)="plusQtd(id)" color="secondary"></ion-icon>
-							</ion-col>
-							</ion-row>
-							</ion-grid>
+							<!--<ion-grid class="filters" no-padding>-->
+							<ion-card>
+								<ion-item>
+									<h2 style="text-align: center" ion-text color="dark" class="fw700">{{menu.name}} : \{{menu.price}}</h2>
+									<ion-row style="text-align:center">
+										<ion-col text-center col-4>
+											<ion-icon name="remove-circle" class="text-22x" tappable (click)="minusQtd(id)"   color="secondary"></ion-icon>
+										</ion-col>
+										<ion-col text-center col-4>
+											<h2 ion-text color="dark" class="fw700">{{menu.status}}</h2>
+										</ion-col>
+										<ion-col text-center col-4>
+											<ion-icon name="add-circle" class="text-22x"  tappable (click)="plusQtd(id)" color="secondary"></ion-icon>
+										</ion-col>
+									</ion-row>
+								</ion-item>
+							</ion-card>
+
+
+
+							<!--</ion-grid>-->
 							<!--<div item-right>-->
 							<!--<ion-badge>{{ order.order.price * order.qtd | currency }}</ion-badge>-->
 							<!--</div>-->
@@ -57,10 +59,9 @@
 						<!--</ion-item-options>-->
 
 					</ion-item-sliding>
-					<ion-card-content>
-
+					<ion-card-content style="text-align: center;">
 						<h1 ion-text full large color="dark">Total Order Value</h1>
-						<h2 ion-text full large color="dark" >\ {{totalprice}}</h2>
+						<h2 ion-text class="fw700" full large color="dark" >\ {{totalprice}}</h2>
 					</ion-card-content>
 
 					<button ion-button full large color="dark" no-margin icon-right (click)="payment()">
@@ -68,8 +69,8 @@
 						<ion-icon name="card"></ion-icon>
 					</button>
 				</ion-list>
-				</ion-col>
-			</ion-row>
+			</ion-col>
+		</ion-row>
 
 	</ion-grid>
 </ion-content>
