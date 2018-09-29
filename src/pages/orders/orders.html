@@ -13,17 +13,27 @@
 <ion-content class="lightest-bg">
 
 	<ion-grid no-padding fixed>
-		<ion-row style="height: 300px">
+		<ion-row style="height: 210px">
 			<ion-col>
 				<div id="canvasContainer" style="opacity:0;"></div>
 			</ion-col>
 		</ion-row>
-		<button ion-button round (click)="takePicture()">
-			Recognize
-		</button>
-		<button ion-button round (click)="openFavoriteListPage()">
-			Entering Table Code
-		</button>
+		<ion-row align-items-center>
+			<ion-col text-center>
+				<div class="center">
+					<button ion-button round (click)="takePicture()">
+						Recognize
+					</button>
+				</div>
+			</ion-col>
+			<ion-col text-center>
+				<div class="center">
+					<button ion-button round (click)="openFavoriteListPage()">
+						Enter Code
+					</button>
+				</div>
+			</ion-col>
+		</ion-row>
 		<img src="assets/img/howtouse.png" class="center" alt="howtouse" style="padding-top: 10px">
 	</ion-grid>
 

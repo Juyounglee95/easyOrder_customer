@@ -78,7 +78,7 @@ export class WriteEditReviewPage {
 		alert.present();
 	}
 	addReview(){
-		var success  = this.editReviewAsync().then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-home');}).catch();
+		var success  = this.editReviewAsync().then(()=> this.presentAlert()).then(()=>{this.navCtrl.setRoot('page-home');}).catch();
 		//console.log("result:",success);
 
 		console.log(this.reviewtext);
