@@ -77,8 +77,8 @@ export class foodIonicApp {
 						console.log(token);
 					});
 
-					this.statusBar.overlaysWebView(false);
-					this.splashScreen.hide();
+						this.statusBar.overlaysWebView(false);
+						this.splashScreen.hide();
 				});
 				if (!this.platform.is('mobile')) {
 					this.tabsPlacement = 'top';
