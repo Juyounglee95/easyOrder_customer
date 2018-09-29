@@ -3,15 +3,6 @@
     <ion-title>
       <span ion-text>Restaurant</span>
     </ion-title>
-
-    <ion-buttons end>
-      <button ion-button (click)="favorite(restaurant)">
-        <ion-icon name="heart"></ion-icon>
-      </button>
-      <button ion-button (click)="share(restaurant)">
-          <ion-icon name="share"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -121,7 +112,7 @@
 								<!--</ion-thumbnail>-->
 
 
-								<h2  ion-text class="fw500"> {{menu.name}} : {{menu.price}} 원</h2>
+								<h2  ion-text class="fw500"> {{menu.name}} : ${{menu.price}}</h2>
 
 								<!--<h2 ion-text color="dark" class="fw500">{{menu.name}}</h2>-->
 								<!--<p ion-text color="primary" class="text-11x">{{ dish.ingredients }}</p>-->
@@ -138,10 +129,4 @@
 	</ion-grid>
 
   </ion-card>
-
-  <ion-fab bottom right>
-    <button ion-fab round icon-only color="dark" (click)="openCart()">
-      <ion-icon name="cart" class="text-white"></ion-icon>
-    </button>
-  </ion-fab>
 </ion-content>

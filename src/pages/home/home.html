@@ -6,70 +6,26 @@
     <ion-title>
       <span ion-text class="fw700">Easy</span><span ion-text class="fw300">Order</span>
     </ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="presentNotifications($event)">
-        <ion-icon name="notifications"></ion-icon>
-      </button>
-      <button ion-button (click)="openCart()">
-        <ion-icon name="cart"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
-
-  <!--<ion-toolbar color="primary">-->
-    <!--<ion-searchbar [(ngModel)]="searchKey" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"></ion-searchbar>-->
-    <!--<ion-buttons end>-->
-      <!--<button ion-button (click)="openRestaurantFilterPage()">-->
-        <!--<ion-icon name="options"></ion-icon>-->
-      <!--</button>-->
-    <!--</ion-buttons>-->
-  <!--</ion-toolbar>-->
 </ion-header>
 
 <ion-content>
 
 	<ion-grid no-padding fixed>
-		<!--<ion-row no-padding>-->
-			<!--<ion-col>-->
-
-				<!--<ion-card no-margin margin-bottom>-->
-			    <!--<ion-item class="lightest-bg">-->
-			      <!--<h3 ion-text no-margin color="dark" class="fw500 no-margin">Restaurants near you:</h3>-->
-			      <!--<span ion-text class="text-11x no-margin" color="primary">{{yourLocation}}</span>-->
-			      <!--<button ion-button outline round item-end icon-right color="primary" (click)="alertLocation()">-->
-			      	<!--Change Location-->
-			      	<!--<ion-icon name="locate"></ion-icon>-->
-			      <!--</button>-->
-			    <!--</ion-item>-->
-				<!--</ion-card>-->
-
-			<!--</ion-col>-->
-		<!--</ion-row>-->
-
 		<ion-list ion-row padding-horizontal>
 		  <button ion-item ion-col *ngFor="let restaurant of restaurants; let id = index " (click)="openRestaurantDetail(id)" col-12 col-md-6>
 		    <ion-thumbnail item-start>
-		        <img src="{{thumbnail[id]}}">
+		        <img src="assets/img/restaurants/{{restaurant.name}}.jpg">
 		    </ion-thumbnail>
 		    <h3 ion-text color="dark" class="fw500">{{restaurant.name}}</h3>
 		    <p ion-text class="text-12x">
-				<!--<span ion-text color="secondary" class="fw700">{{restaurant.info}}</span> ∙-->
-				<span ion-text color="primary">{{ restaurant.info }}</span>
+				<span ion-text color="secondary" class="fw700">{{restaurant.address}}</span>
 			</p>
-		    <!--<p ion-text class="text-12x">1 mile<sup>sq</sup> ∙ 30 - 60min</p>-->
-				<!--<ion-badge class="white-bg text-secondary" item-end>-->
-					<!--<ion-icon name="star"></ion-icon>-->
-					<!--{{ restaurant.rating | number:'1.1' }}-->
-				<!--</ion-badge>-->
+			  <p ion-text class="text-12x">
+				  <span ion-text color="primary">{{restaurant.hours}}</span>
+			  </p>
 		  </button>
 		</ion-list>
-
-	  <!--<ion-row padding>-->
-	    <!--<button ion-button round block color="secondary" (click)="openRestaurantListPage()">-->
-	      <!--See more-->
-	    <!--</button>-->
-	  <!--</ion-row>-->
-
 	</ion-grid>
 
 </ion-content>
