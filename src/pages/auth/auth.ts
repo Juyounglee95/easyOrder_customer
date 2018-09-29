@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { IonicPage, NavController, AlertController, ToastController, MenuController } from 'ionic-angular';
 import * as firebase from 'firebase';
+import { IamportService } from 'iamport-ionic-kcp';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @IonicPage({
 	name: 'page-auth',
@@ -18,9 +21,10 @@ export class AuthPage implements OnInit {
 	public onRegisterForm: FormGroup;
 	auth: string = "login";
 
-	constructor(private _fb: FormBuilder, public nav: NavController, public forgotCtrl: AlertController, public menu: MenuController, public toastCtrl: ToastController) {
+	constructor(private _fb: FormBuilder, public nav: NavController, public forgotCtrl: AlertController, public menu: MenuController, public toastCtrl: ToastController, public iamport: IamportService, private http: HttpClient,private theInAppBrowser: InAppBrowser) {
 		this.menu.swipeEnable(false);
 		this.menu.enable(false);
+
 	}
 
 	ngOnInit() {
@@ -140,6 +144,26 @@ export class AuthPage implements OnInit {
 			]
 		});
 		forgot.present();
+	}
+	certification(event) {
+		const param = {
+			merchant_uid : 'merchant_' + new Date().getTime() //본인인증과 연관된 가맹점 내부 주문번호가 있다면 넘겨주세요
+		};
+
+		this.iamport.certification("imp94907252", param)
+			.then((response)=> {
+				if ( response.isSuccess() ) {
+					//TODO : 본인인증 성공일 때 처리
+					alert("성공! imp_uid : " + response.getImpUid() + "\nmerchant_uid : " + response.getMerchantUid());
+				} else {
+					//TODO : 본인인증 실패일 때 처리
+					alert("실패 imp_uid : " + response.getImpUid() + "\nmerchant_uid : " + response.getMerchantUid());
+				}
+			})
+			.catch((err)=> {
+				alert(err)
+			})
+		;
 	}
 
 }
