@@ -108,7 +108,7 @@ export class EditReviewPage {
 		  querySnapshot.docChanges.forEach(change => {
 			  const reviewid = change.doc.id;
 			  this.db.collection('review').doc(reviewid).delete().then(()=>
-			  this.updateOrder()).then(()=>this.presentAlert2()).then(()=>this.navCtrl.push('page-home')).catch(err=> console.log("error"));
+			  this.updateOrder()).then(()=>this.presentAlert2()).then(()=>this.navCtrl.setRoot('page-home')).catch(err=> console.log("error"));
 			  // do something with foo and fooId
 			  //resolve();
 		  })

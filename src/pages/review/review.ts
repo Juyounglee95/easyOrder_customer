@@ -93,7 +93,7 @@ export class ReviewPage {
 		alert.present();
 	}
   addReview(){
-	  var success  = this.addReviewAsync().then(()=> this.updateOrder()).then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-home');}).catch();
+	  var success  = this.addReviewAsync().then(()=> this.updateOrder()).then(()=> this.presentAlert()).then(()=>{this.navCtrl.setRoot('page-home');}).catch();
 	  //console.log("result:",success);
 
   	console.log(this.reviewtext);
