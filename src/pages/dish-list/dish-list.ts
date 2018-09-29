@@ -48,7 +48,8 @@ export class DishListPage {
 							code : doc.data().store_code,
 							time : doc.data().timestamp,
 							id : doc.data().id,
-							review : doc.data().review
+							review : doc.data().review,
+							price : doc.data().totalprice
 							//status : doc.data().status
 						});
 					});

@@ -9,29 +9,114 @@
 	</ion-navbar>
 </ion-header>
 
+
+
 <ion-content class="lightest-bg">
 
-	<ion-grid no-padding fixed>
+	<ion-grid no-padding fixed >
 		<ion-row no-padding>
-			<ion-col>
-				<ion-list>
+			<ion-col class="text-center">
 
-					<ion-item *ngFor="let order of orders; let id = index">
-					<!--<ion-thumbnail item-start>-->
-						<!--<img src="{{dish.picture}}">-->
-					<!--</ion-thumbnail>-->
-						<h2 ion-text color="dark" class="fw500">{{order.menu}}</h2>
 
-						<h2 ion-text color="dark" class="fw500">{{order.code}}</h2>
-					<p ion-text color="primary" class="text-11x">{{ order.time}}</p>
-						<button *ngIf="!order.review" item-right ion-button small (click)="openReview(id)" >Write Review</button>
-						<button *ngIf="order.review" item-right ion-button small (click)="editReview(id)">Edit Review</button>
-					<!--<button ion-button clear class="green-bg text-white" item-end>{{ dish.price | currency }}</button>-->
-					</ion-item>
+				<ion-list no-margin *ngFor="let order of orders; let id = index" >
+					<h2 ion-text color="dark" text-center> <strong>Order List</strong></h2>
+					<ion-grid class="text-center" no-padding>
+						<ion-row>
+							<ion-col class="text-center">
+								<ion-card *ngIf="!orders.length" class="primary-bg" margin-top>
+									<ion-card-content>
+										<p text-center class="text-white">You do not have order history.</p>
+									</ion-card-content>
+								</ion-card>
+
+								<ion-card *ngFor="let order of orders; let id = index">
+
+									<ion-card-content no-padding>
+
+										<!--<ion-list  no-margin>-->
+										<div ion-item >
+											<h2 ion-text color="dark" class="fw700"><strong>Store: </strong>{{order.code}}</h2>
+											<h2 ion-text color="dark" class="fw700">Menu: {{order.menu}}</h2>
+											<!--<h2 ion-text color="dark" class="fw700">Price: {{order.price}}</h2>-->
+
+											<p ion-text color="primary"> <span class="fw700">When {{ order.time}}</span></p>
+
+											<ion-badge color="primary">{{ order.price | currency }}</ion-badge>
+
+										</div>
+										<!--</ion-list>-->
+									</ion-card-content>
+									<ion-row no-padding>
+										<ion-col text-center>
+											<button *ngIf="!order.review" ion-button clear small color="danger" (click)="openReview(id)" >
+												<ion-icon name='create'></ion-icon>
+												Write Review
+											</button>
+										</ion-col>
+										<ion-col text-center>
+											<button *ngIf="order.review" ion-button clear small color="danger" (click)="editReview(id)">
+												<ion-icon name='color-wand'></ion-icon>
+												Edit Review
+											</button>
+										</ion-col>
+
+									</ion-row>
+
+
+								</ion-card>
+
+
+
+							</ion-col>
+						</ion-row>
+					</ion-grid>
 
 				</ion-list>
 			</ion-col>
 		</ion-row>
-	</ion-grid>
 
+	</ion-grid>
 </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<ion-content class="lightest-bg">-->
+
+	<!--<ion-grid no-padding fixed>-->
+		<!--<ion-row no-padding>-->
+			<!--<ion-col>-->
+				<!--<ion-list>-->
+
+					<!--<ion-item *ngFor="let order of orders; let id = index">-->
+					<!--&lt;!&ndash;<ion-thumbnail item-start>&ndash;&gt;-->
+						<!--&lt;!&ndash;<img src="{{dish.picture}}">&ndash;&gt;-->
+					<!--&lt;!&ndash;</ion-thumbnail>&ndash;&gt;-->
+						<!--<h2 ion-text color="dark" class="fw500">{{order.menu}}</h2>-->
+
+						<!--<h2 ion-text color="dark" class="fw500">{{order.code}}</h2>-->
+						<!--<h2 ion-text color="dark" class="fw500">{{order.price}}</h2>-->
+					<!--<p ion-text color="primary" class="text-11x">{{ order.time}}</p>-->
+						<!--<button *ngIf="!order.review" item-right ion-button small (click)="openReview(id)" >Write Review</button>-->
+						<!--<button *ngIf="order.review" item-right ion-button small (click)="editReview(id)">Edit Review</button>-->
+					<!--&lt;!&ndash;<button ion-button clear class="green-bg text-white" item-end>{{ dish.price | currency }}</button>&ndash;&gt;-->
+					<!--</ion-item>-->
+
+				<!--</ion-list>-->
+			<!--</ion-col>-->
+		<!--</ion-row>-->
+	<!--</ion-grid>-->
+
+<!--</ion-content>-->

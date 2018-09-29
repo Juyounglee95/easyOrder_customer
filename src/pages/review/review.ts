@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import * as firebase from "firebase";
 import 'firebase/firestore';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 /**
  * Generated class for the ReviewPage page.
  *
@@ -28,17 +29,52 @@ export class ReviewPage {
 	id: any;
 
 	public  db = firebase.firestore();
-  constructor(public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController) {
+	public onYourRestaurantForm: FormGroup;
+  constructor(public loadingCtrl: LoadingController, public toastCtrl: ToastController, private _fb: FormBuilder,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController) {
   	this.time = this.navParams.get("time");
 	  this.store = this.navParams.get("store");
 	  this.menu = this.navParams.get("menu");
 	  this.code = this.navParams.get("code");
 	  this.code= this.code.toString();
 	  this.id = this.navParams.get("id");
-	  // console.log(this.reviewtext);
-
+console.log(this.store, this.menu, this.code, this.id)
   }
+	ngOnInit() {
+		this.onYourRestaurantForm = this._fb.group({
 
+
+			restaurantAddress: ['', Validators.compose([
+				Validators.required
+			])],
+			rate: ['', Validators.compose([
+				Validators.required
+			])],
+
+		});
+	}
+	presentToast() {
+		// send booking info
+		let loader = this.loadingCtrl.create({
+			content: "Please wait..."
+		});
+		// show message
+		let toast = this.toastCtrl.create({
+			showCloseButton: true,
+			cssClass: 'profiles-bg',
+			message: 'Your review was enrolled!',
+			duration: 3000,
+			position: 'bottom'
+		});
+
+		loader.present();
+
+		setTimeout(() => {
+			loader.dismiss();
+			toast.present();
+			// back to home page
+			this.navCtrl.setRoot('page-home');
+		}, 3000)
+	}
 	onModelChange(event){
 		this.rate = event;
 		console.log(event);
@@ -93,7 +129,7 @@ export class ReviewPage {
 		alert.present();
 	}
   addReview(){
-	  var success  = this.addReviewAsync().then(()=> this.updateOrder()).then(()=> this.presentAlert()).then(()=>{this.navCtrl.setRoot('page-home');}).catch();
+	  var success  = this.addReviewAsync().then(()=> this.updateOrder()).then(()=> this.presentToast()).catch();
 	  //console.log("result:",success);
 
   	console.log(this.reviewtext);

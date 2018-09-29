@@ -1,3 +1,4 @@
+
 <!--
   Generated template for the ReviewPage page.
 
@@ -5,43 +6,148 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
-	<ion-navbar>
-		<ion-title>Edit Review</ion-title>
+	<ion-navbar  color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text>Edit Review</span>
+		</ion-title>
 	</ion-navbar>
-
 </ion-header>
 
+<ion-content class="your-restaurant lightest-bg">
 
-<ion-content padding>
-	<ion-list>
-		<ion-item>
-			<ion-label>RESTAURANT INFO</ion-label>
-			<ion-label color="primary" >{{store}}</ion-label>
-			<ion-label color="primary" >{{time}}</ion-label>
-			<ion-label color="primary" >{{menu}}</ion-label>
-			<!--<ion-input [(ngModel)]="reviewtext" placeholder="Write Review"></ion-input>-->
-		</ion-item>
-		<ion-item>
-			<ion-label color="primary" >REVIEW</ion-label>
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+			<ion-col>
+				<ion-card class="primary-bg">
+					<ion-card-content>
+						<p class="text-white">Complete the form with your review and save it.</p>
+					</ion-card-content>
+				</ion-card>
 
-			<ion-input [(ngModel)]="reviewtext" value={{content}}></ion-input>
-		</ion-item>
-		<ion-item>
-			<ion-label color="primary">RATE</ion-label>
+				<ion-card>
+					<ion-card-content>
+						<ion-card-header text-center class="primary-bg">
+							<p ion-text class="text-18x text-white fw300"><strong>REVIEW</strong> </p>
+						</ion-card-header>
+						<ion-card-content no-padding >
+							<ion-label text-center color="primary"><strong>RESTAURANT INFO</strong></ion-label>
 
-		</ion-item>
-		<ion-item>
-			<rating [(ngModel)]="star"
-					readOnly="false"
-					max="5"
-					emptyStarIconName="star-outline"
-					halfStarIconName="star-half"
-					starIconName="star"
-					nullable="true"
-					(ngModelChange)="onModelChange($event)"> <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
-			</rating>
-		</ion-item>
-	</ion-list>
-	<button ion-button round (click)="addReview()">Edit Review</button>
+							<!--<ion-list  no-margin>-->
+							<div ion-item >
+								<h2 ion-text color="dark" class="fw700">Restaurant: {{store}}</h2>
+								<br>
+								<h2 ion-text color="dark" class="fw700">Ordered Menu: {{menu}}</h2>
+
+								<span ion-text class="author text-11x"> WHEN {{time}}</span>
+								<!--<p ion-text color="primary"> <span class="fw700">{{Order.timeStamp}}</span></p>-->
+
+								<!--<ion-badge color="primary">{{ Order.totalPrice | currency }}</ion-badge>-->
+
+							</div>
+							<!--</ion-list>-->
+						</ion-card-content>
+						<form [formGroup]="onYourRestaurantForm" class="list-form">
+							<ion-list margin-bottom>
+
+
+
+								<ion-item>
+									<ion-label color="primary" stacked>Review content</ion-label>
+									<ion-textarea rows="13"  [(ngModel)]="reviewtext" value={{content}} formControlName="restaurantAddress"></ion-textarea>
+								</ion-item>
+								<p ion-text color="danger" class="text-1x has-error" *ngIf="onYourRestaurantForm.get('restaurantAddress').touched && onYourRestaurantForm.get('restaurantAddress').hasError('required')">This field is required</p>
+								<ion-item >
+									<rating [(ngModel)]="rate"
+											readOnly="false"
+											max="5"
+											emptyStarIconName="star-outline"
+											halfStarIconName="star-half"
+											starIconName="star"
+											nullable="true"
+											formControlName="rate"
+											(ngModelChange)="onModelChange($event)"> <!--use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.-->
+									</rating>
+								</ion-item>
+							</ion-list>
+
+							<button ion-button block color="dark" (click)="addReview()" [disabled]="!onYourRestaurantForm.valid">Save Review</button>
+						</form>
+					</ion-card-content>
+				</ion-card>
+
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+
+
+
 </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+  Generated template for the ReviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--<ion-header>-->
+
+	<!--<ion-navbar>-->
+		<!--<ion-title>Edit Review</ion-title>-->
+	<!--</ion-navbar>-->
+
+<!--</ion-header>-->
+
+
+<!--<ion-content padding>-->
+	<!--<ion-list>-->
+		<!--<ion-item>-->
+			<!--<ion-label>RESTAURANT INFO</ion-label>-->
+			<!--<ion-label color="primary" >{{store}}</ion-label>-->
+			<!--<ion-label color="primary" >{{time}}</ion-label>-->
+			<!--<ion-label color="primary" >{{menu}}</ion-label>-->
+			<!--&lt;!&ndash;<ion-input [(ngModel)]="reviewtext" placeholder="Write Review"></ion-input>&ndash;&gt;-->
+		<!--</ion-item>-->
+		<!--<ion-item>-->
+			<!--<ion-label color="primary" >REVIEW</ion-label>-->
+
+			<!--<ion-input [(ngModel)]="reviewtext" value={{content}}></ion-input>-->
+		<!--</ion-item>-->
+		<!--<ion-item>-->
+			<!--<ion-label color="primary">RATE</ion-label>-->
+
+		<!--</ion-item>-->
+		<!--<ion-item>-->
+			<!--<rating [(ngModel)]="star"-->
+					<!--readOnly="false"-->
+					<!--max="5"-->
+					<!--emptyStarIconName="star-outline"-->
+					<!--halfStarIconName="star-half"-->
+					<!--starIconName="star"-->
+					<!--nullable="true"-->
+					<!--(ngModelChange)="onModelChange($event)"> &lt;!&ndash;use it when you need to do something when user clicks on a star. in case you only need to change ngModel property, this property can be ommited.&ndash;&gt;-->
+			<!--</rating>-->
+		<!--</ion-item>-->
+	<!--</ion-list>-->
+	<!--<button ion-button round (click)="addReview()">Edit Review</button>-->
+<!--</ion-content>-->

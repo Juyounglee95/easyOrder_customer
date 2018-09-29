@@ -1,49 +1,41 @@
-<ion-header>
+<ion-header margin-bottom="50px" >
+
 	<ion-navbar color="primary">
 		<button ion-button menuToggle>
 			<ion-icon name="menu"></ion-icon>
 		</button>
-		<ion-title>
-			<span ion-text class="fw700">Event List</span>
-		</ion-title>
+		<ion-title>Event</ion-title>
 	</ion-navbar>
-</ion-header>
+
+</ion-header >
 
 
 <ion-content margin-top="200px" >
-	<ion-card>
-		<ion-list class="list-full-border" *ngFor="let review of orders;">
-			<ion-item >
-				<ion-card-content>
-					<h2 >
-						Title : {{ review.title }}
-					</h2>
-					<p ion-text>
-						Content : {{ review.content }}
-					</p>
+	<ion-list class="list-full-border" *ngFor="let review of orders; let id = index">
+
+		<ion-card >
+			<ion-card-header text-center class="primary-bg">
+				<p ion-text class="text-18x text-white fw300"><strong>{{ review.title }}</strong> </p>
+			</ion-card-header>
+			<ion-card-content no-padding>
+
+				<!--<ion-list  no-margin>-->
+				<div ion-item >
+					<p ion-text color="dark" class="fw700">{{ review.content }}</p>
+					<br>
 					<span ion-text class="author text-11x"> WHEN {{ review.timeStamp }}</span>
-				</ion-card-content>
-			</ion-item>
-		</ion-list>
-	</ion-card>
+					<!--<p ion-text color="primary"> <span class="fw700">{{Order.timeStamp}}</span></p>-->
+
+					<!--<ion-badge color="primary">{{ Order.totalPrice | currency }}</ion-badge>-->
+
+				</div>
+				<!--</ion-list>-->
+			</ion-card-content>
+
+
+		</ion-card>
+
+
+	</ion-list>
 </ion-content>
 
-<!--<ion-footer class="no-padding dark-bg">-->
-	<!--<ion-grid no-padding fixed>-->
-		<!--<ion-row no-padding>-->
-			<!--&lt;!&ndash;<button ion-button icon-left block color="primary" (click)="openNearbyPage()" class="col col-4">&ndash;&gt;-->
-			<!--&lt;!&ndash;<ion-icon name="compass" class="text-18x"></ion-icon>&ndash;&gt;-->
-			<!--&lt;!&ndash;<span ion-text class="text-12x">Nearby</span>&ndash;&gt;-->
-			<!--&lt;!&ndash;</button>&ndash;&gt;-->
-			<!--<button ion-button icon-left block color="primary" (click)="openCategoryPage()" class="col col-4">-->
-				<!--<ion-icon name="list-box" class="text-18x"></ion-icon>-->
-				<!--<span ion-text class="text-12x">Enroll Event</span>-->
-			<!--</button>-->
-			<!--&lt;!&ndash;<button ion-button icon-left block color="primary" (click)="openOrders()" class="col col-4">&ndash;&gt;-->
-			<!--&lt;!&ndash;<ion-icon name="camera" class="text-18x"></ion-icon>&ndash;&gt;-->
-			<!--&lt;!&ndash;<span ion-text class="text-12x">Order</span>&ndash;&gt;-->
-			<!--&lt;!&ndash;</button>&ndash;&gt;-->
-		<!--</ion-row>-->
-	<!--</ion-grid>-->
-
-<!--</ion-footer>-->

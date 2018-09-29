@@ -1,25 +1,66 @@
 <ion-header>
-  <ion-navbar color="primary">
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>
-      <span ion-text>Waiting</span>
-    </ion-title>
-  </ion-navbar>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text>Waiting</span>
+
+		</ion-title>
+	</ion-navbar>
 
 </ion-header>
 
-<ion-content class="lightest-bg">
-	<ion-grid no-padding fixed>
-		<h2>{{waitingNumber}} is waiting.</h2>
-		<button ion-button full large color="dark" no-margin icon-right (click)="waiting()">
-			Enroll Waiting
-			<ion-icon name="alarm"></ion-icon>
-		</button>
-	</ion-grid>
+<ion-content margin-top="100px" class="lightest-bg">
+	<ion-card>
+		<ion-card-header text-center class="primary-bg">
+			<h2 ion-text class="text-18x text-white fw300"><strong>Current Waiting Teams</strong></h2>
+		</ion-card-header>
+
+		<ion-card-content text-center>
+			<br>
+			<br>
+
+			<ion-img style="width: 200px; height: 200px;" src="assets/img/check-list.png"></ion-img>
+			<br>
+			<br>
+			<h2 ion-text class="text-18x text-primary fw300"><strong>{{waitingNumber}}</strong></h2>
+
+			<br>
+			<h2 ion-text class="text-18x text-primary fw300"><strong>Is Waiting</strong></h2>
+			<br>
+
+
+		</ion-card-content>
+
+
+
+
+	</ion-card>
+
+
+
+
+
+
 
 
 
 </ion-content>
+
+
+<ion-footer class="no-padding dark-bg">
+	<ion-grid no-padding fixed>
+		<ion-row no-padding>
+
+			<button ion-button icon-left block color="primary" (click)="waiting()" class="col col-4">
+				<ion-icon name="alarm" class="text-18x"></ion-icon>
+				<p ion-text class="text-12x"><strong>Enroll Waiting</strong></p>
+			</button>
+
+		</ion-row>
+	</ion-grid>
+
+</ion-footer>
+
 
