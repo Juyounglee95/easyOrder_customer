@@ -103,9 +103,9 @@ export class NearbyPage {
 				var bounds =  new leaflet.latLngBounds(p1, p2);
 				this.map = leaflet.map("nearby-map",{
 					// Zoom: 30,
-					 minZoom:18,
+					 minZoom:10,
 					// maxZoom : 50,
-					maxBounds : bounds
+					maxBounds : 50
 				}).setView([pos.coords.latitude, pos.coords.longitude],30);
 				// this.map = leaflet.map("nearby-map").setView([pos.coords.latitude, pos.coords.longitude], 30);
 
