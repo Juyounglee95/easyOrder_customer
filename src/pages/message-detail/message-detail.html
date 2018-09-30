@@ -1,31 +1,45 @@
-<ion-header>
-    <ion-navbar color="primary">
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
-        <ion-title>
-            <span ion-text>Message</span>
-        </ion-title>
-    </ion-navbar>
+<<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text class="fw700">Event Detail</span>
+		</ion-title>
+	</ion-navbar>
 </ion-header>
 
-<ion-content>
 
-	<ion-grid no-padding fixed>
-		<ion-row no-padding>
-			<ion-col>
-				<div class="message-header profiles-bg" padding>
-					<h5 ion-text color="light" class="fw700">{{message.title}}</h5>
-					<p ion-text no-margin color="light">{{message.date | date: 'MM/dd/yyyy'}} ∙ by {{message.senderName}}</p>
-				</div>
+<ion-content class="lightest-bg">
+	<ion-card  class="full-width" no-margin>
+		<!-- <img src="{{restaurant.picture}}"> -->
+		<ion-card-content>
+			<h1 ion-text color="dark" class="card-title fw700" text-center>
+				{{title}}
+			</h1>
 
-				<div padding-horizontal>
-					<p>
-						{{message.message}}
-					</p>
-				</div>
-			</ion-col>
-		</ion-row>
-	</ion-grid>
+		</ion-card-content>
+
+		<ion-grid no-padding fixed>
+			<ion-row no-padding>
+				<ion-col>
+
+					<div  padding>
+
+
+						<hr>
+
+						<p ion-text margin-bottom>{{ content}}</p>
+						<hr>
+						<span ion-text class="author text-11x">WHEN {{ timeStamp}}</span>
+
+						<br><br>
+
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+	</ion-card>
 
 </ion-content>

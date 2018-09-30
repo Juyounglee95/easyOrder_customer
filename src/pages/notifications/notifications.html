@@ -1,22 +1,45 @@
-<ion-list class="no-margin">
-  <ion-list-header class="no-margin">
-  	<ion-icon name="notifications" color="primary"></ion-icon>
-  	<span ion-text color="primary" class="bold">Notifications</span>
-  </ion-list-header>
-  <button ion-item color="primary" class="text-11x" (click)="messages()">
-  	<ion-icon name="mail"></ion-icon>
-  	New Offer 25% OFF
-  </button>
-  <button ion-item class="text-11x" (click)="messages()">
-  	<ion-icon name="mail-open"></ion-icon>
-  	New Offer 15% OFF by month!
-  </button>
-  <button ion-item class="text-11x" (click)="messages()">
-  	<ion-icon name="mail-open"></ion-icon>
-  	Visit our office today!
-  </button>
-  <button ion-item color="primary" class="text-11x" (click)="messages()">
-  	<ion-icon name="mail"></ion-icon>
-  	You New property
-  </button>
-</ion-list>
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text class="fw700">Notice Detail</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content class="lightest-bg">
+	<ion-card  class="full-width" no-margin>
+		<!-- <img src="{{restaurant.picture}}"> -->
+		<ion-card-content>
+			<h1 ion-text color="dark" class="card-title fw700" text-center>
+				{{title}}
+			</h1>
+
+		</ion-card-content>
+
+		<ion-grid no-padding fixed>
+			<ion-row no-padding>
+				<ion-col>
+
+					<div  padding>
+
+
+						<hr>
+
+						<p ion-text margin-bottom>{{ content}}</p>
+						<hr>
+						<span ion-text class="author text-11x">WHEN {{ timeStamp}}</span>
+
+						<br><br>
+
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+	</ion-card>
+
+</ion-content>

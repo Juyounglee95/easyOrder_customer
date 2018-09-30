@@ -59,4 +59,9 @@ export class EventPage {
 				});
 		})
 	}
+
+	readmore(id){
+		this.navCtrl.push('page-message-detail', {'content': this.orders[id].content,'title':this.orders[id].title, 'timeStamp':this.orders[id].timeStamp
+		});
+	}
 }

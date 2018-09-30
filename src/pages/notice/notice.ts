@@ -59,5 +59,8 @@ export class NoticePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad NoticePage');
   }
-
+	readmore(id){
+		this.navCtrl.push('page-notifications', {'content': this.orders[id].content,'title':this.orders[id].title, 'timeStamp':this.orders[id].timeStamp
+		});
+	}
 }

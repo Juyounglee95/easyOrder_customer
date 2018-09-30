@@ -16,10 +16,17 @@ import {MessageService} from '../../providers/message-service-mock';
 export class MessageDetailPage {
 	param: number;
 	message: any;
+	content: any;
+	title: any;
+	timeStamp: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public service: MessageService) {
-    this.param = this.navParams.get('id');
-  	this.message = this.service.getItem(this.param) ? this.service.getItem(this.param) : this.service.getMessages()[0];
+    //this.param = this.navParams.get('id');
+  	//this.message = this.service.getItem(this.param) ? this.service.getItem(this.param) : this.service.getMessages()[0];
+ 	this.content= this.navParams.get("content");
+ 	this.title = this.navParams.get("title");
+ 	this.timeStamp= this.navParams.get("timeStamp");
+
   }
 
 }
