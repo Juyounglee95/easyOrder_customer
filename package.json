@@ -106,7 +106,6 @@
         },
         "platforms": [
             "ios",
-            "android",
             "browser"
         ]
     },

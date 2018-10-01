@@ -111,7 +111,7 @@ export class CategoryPage {
 
 		});
 	}
-	openWalkthrough(){
+	openFavoriteListPage(){
 		this.navCtrl.push('page-walkthrough');
 	}
 	takePicture(){
@@ -148,7 +148,6 @@ export class CategoryPage {
 	async  storeAsync(){
 		let val = await this._store();
 		return val;
-
 	}
 
 	_store():Promise<any> {

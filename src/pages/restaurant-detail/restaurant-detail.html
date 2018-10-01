@@ -107,16 +107,12 @@
 						<br>
 						<ion-list>
 							<ion-item no-padding *ngFor="let menu of menus" >
-								<!--<ion-thumbnail item-start>-->
-								<!--<img src="{{dish.picture}}">-->
-								<!--</ion-thumbnail>-->
-
-
-								<h2  ion-text class="fw500"> {{menu.name}} : ${{menu.price}}</h2>
-
-								<!--<h2 ion-text color="dark" class="fw500">{{menu.name}}</h2>-->
+								<ion-thumbnail item-start>
+								<img src="assets/img/dishes/{{menu.name}}.jpg">
+								</ion-thumbnail>
+								<h2 ion-text color="dark" class="fw500">{{menu.name}}</h2>
 								<!--<p ion-text color="primary" class="text-11x">{{ dish.ingredients }}</p>-->
-								<!--<button ion-button clear class="green-bg text-white" item-end>{{ dish.price | currency }}</button>-->
+								<button ion-button clear class="green-bg text-white" item-end>{{menu.price}} won</button>
 							</ion-item>
 						</ion-list>
 

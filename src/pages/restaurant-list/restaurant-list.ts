@@ -60,23 +60,19 @@ export class RestaurantListPage {
 	_start():Promise<any>{
 		return new Promise<any>(resolve => {
 			var wn = 0;
-			let order : number=0;
+			let order : number=999999;
 			this.db.collection(this.store).get().then(function(querySnapshot) {
 				querySnapshot.forEach(doc => {
 					if(doc.data().user == firebase.auth().currentUser.email){
 						order=doc.data().order;
 					}
 				});
-				if(order==0 || order==null){
-					resolve(0);
-				}else{
-					querySnapshot.forEach(doc =>{
-						if(order>doc.data().order){
-							wn++;
-						}
-					});
-					resolve(wn);
-				}
+				querySnapshot.forEach(doc =>{
+					if(order>=doc.data().order){
+						wn++;
+					}
+				});
+				resolve(wn);
 			});
 		})
 	}

@@ -22,13 +22,13 @@
 						<div ion-item>
 							<!-- (click)="itemTapped(favorite)" -->
 							<ion-thumbnail item-left>
-								<!--<img src="{{order.order.picture}}"/>-->
+								<img src="assets/img/dishes/{{menu.name}}.jpg"/>
 							</ion-thumbnail>
 							<h2 ion-text color="dark" class="fw700">{{menu.name}}</h2>
 							<ion-grid class="filters" no-padding>
 								<ion-row>
 									<ion-col text-center col-2>
-										<ion-icon name="remove-circle" class="text-22x" tappable (click)="minusQtd(id)" [hidden]="menu.status < 2"
+										<ion-icon name="remove-circle" class="text-22x" tappable (click)="minusQtd(id)" [hidden]="menu.status < 1"
 												  color="secondary"></ion-icon>
 									</ion-col>
 									<ion-col text-center col-3>
@@ -42,14 +42,14 @@
 								</ion-row>
 							</ion-grid>
 							<div item-right>
-								<ion-badge>${{menu.price}}</ion-badge>
+								<ion-badge>{{menu.price}} won</ion-badge>
 							</div>
 						</div>
 					</ion-item-sliding>
 						<ion-card class="primary-bg">
 							<ion-card-content>
 								<p ion-text color="light">Total Order Value</p>
-								<h2 ion-text class="text-white fw700">$ {{totalprice}}</h2>
+								<h2 ion-text class="text-white fw700">{{totalprice}} won</h2>
 							</ion-card-content>
 						</ion-card>
 				</ion-list>

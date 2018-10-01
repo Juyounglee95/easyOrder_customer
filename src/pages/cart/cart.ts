@@ -87,10 +87,11 @@ export class CartPage {
 					var success = "success";
 					this.date = new Date().toUTCString();
 					for(let data of this.menus) {
-						this.names += data.name +' : '+ data.status+' ';
+						if(data.status>0) {
+							this.names += data.name + ' : ' + data.status + ' ';
+						}
 					}
 					var addDoc = this.db.collection('order').add({
-
 						menu : this.names,
 						status : true,
 						table_num : this.table,
