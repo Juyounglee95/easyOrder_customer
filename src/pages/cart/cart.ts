@@ -182,8 +182,10 @@ export class CartPage {
 	presentAlert() {
 		this.order+='Table number : '+this.table+'<br/>';
 		for(let i=0; i<this.menus.length;i++){
+			if(this.menus[i].status>1){
 			this.order += this.menus[i].name + ':' + this.menus[i].status + '<br/>';
 			this.total += this.menus[i].status * this.menus[i].price;
+			}
 		}
 		this.order +='Total price = \u20A9' + this.total;
 		let alert = this.alertCtrl.create({
@@ -196,7 +198,7 @@ export class CartPage {
 
 	openCheckout() {
 		console.log(this.owner);
-		var success  = this.checkoutAsync().then(()=>{this.registerOrder();}).then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-home');}).catch();
+		var success  = this.checkoutAsync().then(()=>{this.registerOrder();}).then(()=> this.presentAlert()).then(()=>{this.navCtrl.setRoot('page-home');}).catch();
 		//console.log("result:",success);
 
 
@@ -227,7 +229,7 @@ export class CartPage {
 			//	console.log(response);
 				if ( response.isSuccess() ) {
 					//TODO : 결제성공일 때 처리
-					var success  = this.checkoutAsync().then(()=>{this.registerOrder();}).then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-home');}).catch();
+					var success  = this.checkoutAsync().then(()=>{this.registerOrder();}).then(()=> this.presentAlert()).then(()=>{this.navCtrl.setRoot('page-home');}).catch();
 
 					console.log(response);
 
