@@ -182,7 +182,7 @@ export class CartPage {
 	presentAlert() {
 		this.order+='Table number : '+this.table+'<br/>';
 		for(let i=0; i<this.menus.length;i++){
-			if(this.menus[i].status>1){
+			if(this.menus[i].status>0){
 			this.order += this.menus[i].name + ':' + this.menus[i].status + '<br/>';
 			this.total += this.menus[i].status * this.menus[i].price;
 			}
